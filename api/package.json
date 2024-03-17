@@ -1,0 +1,12 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/eduardozf/Meeting-Ai.git",
+  "author": "Eduardo Zotelli Ferraz",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "typescript": "^5.4.2"
+  }
+}
