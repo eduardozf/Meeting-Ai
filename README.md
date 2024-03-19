@@ -38,11 +38,11 @@ If you'd like to contribute or provide feedback, feel free to open an issue or s
 * [NextJS](https://nextjs.org/docs)
 * [NodeJS](https://nodejs.org/en)
 * [Typescript](https://www.typescriptlang.org/)
-* [Fastify](https://expressjs.com/)
+* [Fastify](https://fastify.dev/docs/)
 
 <!-- LICENSE -->
 ## License
-Ditributed under MIT license. See `LICENSE` for more information.
+Distributed under MIT license. See `LICENSE` for more information.
 
 <!-- CONTACT -->
 ## Contact
