@@ -14,7 +14,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "@/components/ui/use-toast";
 import { Wand, Music2, Video, AudioLines, SquarePlus } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 
 export default function Home() {
@@ -115,32 +114,7 @@ export default function Home() {
           <div className="w-full border-2 border-neutral-100 p-8 rounded-md space-y-8">
             <div className="w-full">
               <span>Persons</span>
-              <div className="flex space-x-2">
-                <Avatar>
-                  <AvatarImage src="" />
-                  <AvatarFallback className="text-white bg-gray-900 hover:bg-pink-700">
-                    P1
-                  </AvatarFallback>
-                </Avatar>
-                <Avatar>
-                  <AvatarImage src="" />
-                  <AvatarFallback className="text-white bg-gray-900 hover:bg-blue-700">
-                    P2
-                  </AvatarFallback>
-                </Avatar>
-                <Avatar>
-                  <AvatarImage src="" />
-                  <AvatarFallback className="text-white bg-gray-900 hover:bg-green-700">
-                    P3
-                  </AvatarFallback>
-                </Avatar>
-                <Avatar>
-                  <AvatarImage src="" />
-                  <AvatarFallback className="text-white bg-gray-900 hover:bg-purple-600">
-                    P4
-                  </AvatarFallback>
-                </Avatar>
-              </div>
+              <div className="flex space-x-2"></div>
               <span className="text-sm text-gray-500">
                 Persons can only be added when uploading a new meeting
               </span>
