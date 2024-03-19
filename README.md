@@ -12,7 +12,7 @@
     <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-sound-waves-equalizer-audio-radio-signal-music-recording-vector-png-image_6678910.png" alt="Logo" width="112" height="80">
   </a>
 
-  <h3 align="center">Meet AI</h3>
+  <h3 align="center">Meeting AI</h3>
 
   <p align="center">
     A meeting transcriber and assistant!
