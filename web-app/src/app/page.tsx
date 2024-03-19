@@ -12,9 +12,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { toast } from "@/components/ui/use-toast";
-import { Wand, Music2, Video, AudioLines } from "lucide-react";
+import { Wand, Music2, Video, AudioLines, SquarePlus } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 export default function Home() {
   const form = useForm();
@@ -59,7 +60,7 @@ export default function Home() {
                 />
                 <FormField
                   control={form.control}
-                  name="resume"
+                  name="summary"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Summary</FormLabel>
@@ -79,43 +80,63 @@ export default function Home() {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="tags"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Tags</FormLabel>
+                      <FormControl>
+                        <div className="flex space-x-4 items-center">
+                          <Badge>MyTag</Badge>
+                          <div className="flex items-center space-x-1">
+                            <Input
+                              className="max-w-24 max-h-6"
+                              placeholder="New tag"
+                              {...field}
+                            />
+                            <Button
+                              type="button"
+                              className="p-0 m-0 text-gray-500 bg-transparent hover:bg-transparent hover:text-gray-900"
+                            >
+                              <SquarePlus className="h-6 w-6" />
+                            </Button>
+                          </div>
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <Button type="submit">Save</Button>
               </form>
             </Form>
           </div>
           <div className="w-full border-2 border-neutral-100 p-8 rounded-md space-y-8">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                Extra information
-              </h1>
-              <span className="text-sm text-gray-500">
-                More information about the meeting
-              </span>
-            </div>
             <div className="w-full">
               <span>Persons</span>
               <div className="flex space-x-2">
                 <Avatar>
                   <AvatarImage src="" />
-                  <AvatarFallback className="bg-gray-900 text-white hover:bg-pink-900">
+                  <AvatarFallback className="text-white bg-gray-900 hover:bg-pink-700">
                     P1
                   </AvatarFallback>
                 </Avatar>
                 <Avatar>
                   <AvatarImage src="" />
-                  <AvatarFallback className="bg-gray-900 text-white hover:bg-blue-900">
+                  <AvatarFallback className="text-white bg-gray-900 hover:bg-blue-700">
                     P2
                   </AvatarFallback>
                 </Avatar>
                 <Avatar>
                   <AvatarImage src="" />
-                  <AvatarFallback className="bg-gray-900 text-white hover:bg-green-900">
+                  <AvatarFallback className="text-white bg-gray-900 hover:bg-green-700">
                     P3
                   </AvatarFallback>
                 </Avatar>
                 <Avatar>
                   <AvatarImage src="" />
-                  <AvatarFallback className="bg-gray-900 text-white hover:bg-yellow-900">
+                  <AvatarFallback className="text-white bg-gray-900 hover:bg-purple-600">
                     P4
                   </AvatarFallback>
                 </Avatar>
@@ -124,16 +145,16 @@ export default function Home() {
                 Persons can only be added when uploading a new meeting
               </span>
             </div>
-            <div className="w-full border-2 border-neutral-100 rounded-md flex justify-end space-x-4">
-              <Button type="button" className="space-x-2">
+            <div className="w-full flex space-x-4">
+              <Button type="button" className="space-x-2 bg-rose-700">
                 <Video className="h-4 w-4" />
                 <span>Download Video</span>
               </Button>
-              <Button type="button" className="space-x-2">
+              <Button type="button" className="space-x-2 bg-sky-700">
                 <Music2 className="h-4 w-4" />
                 <span>Download Mp3</span>
               </Button>
-              <Button type="button" className="space-x-2">
+              <Button type="button" className="space-x-2 bg-lime-800">
                 <AudioLines className="h-4 w-4" />
                 <span>Download Transcription</span>
               </Button>
