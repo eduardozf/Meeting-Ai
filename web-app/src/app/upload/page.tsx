@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useEffect } from "react";
+import Layout from "@/components/layout/index";
 
 const Upload = () => {
   const form = useForm();
@@ -42,8 +43,7 @@ const Upload = () => {
   }, []);
 
   return (
-    <>
-      <Header />
+    <Layout tab="upload">
       <div className="p-8 space-y-16">
         <div className="flex flex-col items-center">
           <h1 className="font-bold text-4xl">Meeting AI</h1>
@@ -239,7 +239,7 @@ const Upload = () => {
           </form>
         </Form>
       </div>
-    </>
+    </Layout>
   );
 };
 
