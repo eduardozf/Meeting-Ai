@@ -11,9 +11,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import { Video, Plus, Minus } from "lucide-react";
+import { File, Plus, Minus, Video } from "lucide-react";
 import { useForm } from "react-hook-form";
-import Header from "@/components/header";
 import {
   Select,
   SelectContent,
@@ -23,24 +22,65 @@ import {
 } from "@/components/ui/select";
 import { useEffect } from "react";
 import Layout from "@/components/layout/index";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { string } from "zod";
 
 const Upload = () => {
-  const form = useForm();
+  const MAX_FILE_SIZE = 10_000_000_000;
+  const ACCEPTED_IMAGE_TYPES = [
+    "audio/mp3",
+    "video/webm",
+    "video/mp4",
+    "video/wav",
+    "video/mpeg",
+    "video/x-matroska",
+  ];
 
-  function onSubmit(data: any) {
+  const formSchema = z.object({
+    file: z
+      .any()
+      .refine((file) => file, `Video is required.`)
+      .refine((file) => file?.size <= MAX_FILE_SIZE, `Max video size is 10GB.`)
+      .refine(
+        (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+        "Only .mp3, .webm, .mp4, .wav and mpeg formats are supported."
+      ),
+    title: z.string(),
+    language: z.string(),
+    people: z.number().min(1).max(20),
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      file: undefined,
+      title: "",
+      language: "",
+      people: 1,
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
     toast({
       title: "You submitted the following values:",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
         </pre>
       ),
     });
   }
 
   useEffect(() => {
-    console.log(form.watch("upload"));
-  }, []);
+    const file: any = form.watch("file");
+    if (!file?.name) return;
+
+    form.setValue("title", file?.name);
+  }, [form.watch("file")]);
+
+  const fileRef = form.register("file");
 
   return (
     <Layout tab="upload">
@@ -60,37 +100,22 @@ const Upload = () => {
           >
             <FormField
               control={form.control}
-              name="upload"
+              name="file"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <div>
-                      <div className="flex items-center justify-center w-full">
-                        <label
-                          htmlFor="dropzone-file"
-                          className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                        >
-                          <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                            <Video className="w-6 h-6 text-gray-400"></Video>
-                            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                              <span className="font-semibold">
-                                Click to upload
-                              </span>{" "}
-                              or drag and drop
-                            </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              MVK, MP4, MPEG, WAV or WEBM (MAX. 10GB)
-                            </p>
-                          </div>
-                        </label>
-                        <Input
-                          id="dropzone-file"
-                          type={"file"}
-                          {...field}
-                          className="hidden"
-                        />
-                      </div>
-                    </div>
+                    <>
+                      <Dropzone file={field.value} />
+                      <Input
+                        {...fileRef}
+                        id="dropzone-file"
+                        type="file"
+                        className="hidden"
+                        onChange={(event) => {
+                          field.onChange(event.target?.files?.[0] ?? undefined);
+                        }}
+                      />
+                    </>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -118,7 +143,10 @@ const Upload = () => {
                   <FormItem>
                     <FormLabel>Language</FormLabel>
                     <FormControl>
-                      <Select {...field}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <SelectTrigger className="w-[280px]">
                           <SelectValue placeholder="Select a language" />
                         </SelectTrigger>
@@ -212,12 +240,9 @@ const Upload = () => {
                           <Minus className="w-7 h-7" />
                         </Button>
                         <Input
-                          type={"number"}
-                          min={1}
-                          max={20}
-                          defaultValue={1}
-                          className="text-center p-0 m-0 align-middle border-none focus-visible:ring-offset-0 focus-visible:ring-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                           {...field}
+                          type="number"
+                          className="text-center p-0 m-0 align-middle border-none focus-visible:ring-offset-0 focus-visible:ring-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                         />
                         <Button className="p-0 m-0 border-none text-gray-500 bg-transparent hover:bg-transparent hover:text-gray-800">
                           <Plus className="w-7 h-7" />
@@ -240,6 +265,52 @@ const Upload = () => {
         </Form>
       </div>
     </Layout>
+  );
+};
+
+type DropzoneTypes = {
+  file?: {
+    name: string;
+    size: number;
+    type?: string;
+  };
+};
+
+const Dropzone = ({ file }: DropzoneTypes) => {
+  return (
+    <div>
+      <div className="flex items-center justify-center w-full">
+        {file?.size ? (
+          <label
+            htmlFor="dropzone-file"
+            className="flex flex-col items-center justify-center w-full h-64 border-2 border-blue-300 border-dashed rounded-lg cursor-pointer bg-blue-50 hover:bg-blue-100"
+          >
+            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+              <Video className="w-10 h-10 text-blue-500" />
+              <p className="mb-2 text-sm text-blue-500 dark:text-blue-400">
+                <span className="font-semibold">{file?.name}</span>
+              </p>
+            </div>
+          </label>
+        ) : (
+          <label
+            htmlFor="dropzone-file"
+            className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+          >
+            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+              <File className="w-8 h-8 text-gray-500"></File>
+              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                <span className="font-semibold">Click to upload</span> or drag
+                and drop
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                MVK, MP4, MPEG, WAV or WEBM (MAX. 10GB)
+              </p>
+            </div>
+          </label>
+        )}
+      </div>
+    </div>
   );
 };
 

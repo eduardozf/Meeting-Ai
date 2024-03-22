@@ -22,10 +22,7 @@ function Settings() {
       <SheetContent>
         <SheetHeader>
           <SheetClose asChild></SheetClose>
-          <SheetTitle>Settings menu</SheetTitle>
-          <SheetDescription>
-            Make changes to your profile here. Click save when you're done.
-          </SheetDescription>
+          <SheetTitle>Settings Menu</SheetTitle>
         </SheetHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
@@ -35,10 +32,14 @@ function Settings() {
             <Input id="name" value="Lorem Ipsum" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
+            <Label htmlFor="email" className="text-right">
+              Email
             </Label>
-            <Input id="username" value="@loreme" className="col-span-3" />
+            <Input
+              id="email"
+              value="email@example.com"
+              className="col-span-3"
+            />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Button type="button" className="col-span-4 space-x-2">
@@ -47,11 +48,6 @@ function Settings() {
             </Button>
           </div>
         </div>
-        <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit">Save changes</Button>
-          </SheetClose>
-        </SheetFooter>
       </SheetContent>
     </Sheet>
   );
