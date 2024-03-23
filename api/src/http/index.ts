@@ -1,9 +1,13 @@
 import Fastify from 'fastify';
+import { errorHandler } from '../middleware/errorHandler';
 import routes from '../routes';
 
 const server = Fastify({ logger: true });
 
 const port = Number(process.env.PORT) || 3333;
+
+// Register parent error handler
+server.setErrorHandler(errorHandler);
 
 server.register(routes);
 
