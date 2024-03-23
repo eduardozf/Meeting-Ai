@@ -84,7 +84,7 @@ const Upload = () => {
 
   return (
     <Layout tab="upload">
-      <div className="p-8 space-y-16">
+      <div className="p-8 space-y-8 flex items-center flex-col">
         <div className="flex flex-col items-center">
           <h1 className="font-bold text-4xl">Meeting AI</h1>
           <h3 className="text-gray-600 text-md">
@@ -96,7 +96,7 @@ const Upload = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-6 flex flex-col"
+            className="w-1/3 space-y-8 flex flex-col"
           >
             <FormField
               control={form.control}
@@ -122,12 +122,12 @@ const Upload = () => {
               )}
             />
 
-            <div className="w-full flex space-x-6">
+            <div className="w-full flex space-y-2 flex-col items-center">
               <FormField
                 control={form.control}
                 name="title"
                 render={({ field }) => (
-                  <FormItem className="flex-1">
+                  <FormItem className="flex-1 w-full">
                     <FormLabel>Title</FormLabel>
                     <FormControl>
                       <Input placeholder="Video Title" {...field} />
@@ -140,14 +140,14 @@ const Upload = () => {
                 control={form.control}
                 name="language"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full">
                     <FormLabel>Language</FormLabel>
                     <FormControl>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
-                        <SelectTrigger className="w-[280px]">
+                        <SelectTrigger className="w-full">
                           <SelectValue placeholder="Select a language" />
                         </SelectTrigger>
                         <SelectContent>
@@ -232,7 +232,7 @@ const Upload = () => {
                 control={form.control}
                 name="people"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="flex-1 w-full">
                     <FormLabel>People count</FormLabel>
                     <FormControl>
                       <div className="flex border-[1px] border-slate-200 rounded-xl px-2">
@@ -258,7 +258,7 @@ const Upload = () => {
               />
             </div>
 
-            <Button type="submit" className="px-16 self-end">
+            <Button type="submit" className="w-full self-end">
               Upload
             </Button>
           </form>

@@ -12,18 +12,23 @@ const Header = ({ currentTab }: HeaderProps) => {
       <div className="w-full flex justify-center">
         <div className="p-1 rounded-md bg-slate-200 flex items-center">
           <RouteButton
-            name={"Upload"}
-            route={"/upload"}
+            name="Upload"
+            route="/upload"
             active={currentTab === "upload"}
           />
           <RouteButton
-            name={"Projects"}
-            route={"/detail"}
+            name="Projects"
+            route="/projects"
+            active={currentTab === "projects"}
+          />
+          <RouteButton
+            name="Details"
+            route="/detail"
             active={currentTab === "detail"}
           />
           <RouteButton
-            name={"Chat"}
-            route={"/chat"}
+            name="Chat"
+            route="/chat"
             active={currentTab === "chat"}
           />
         </div>
