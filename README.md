@@ -32,6 +32,11 @@ If you'd like to contribute or provide feedback, feel free to open an issue or s
   This project aims to streamline your workflow by transcribing meetings from video to text. It then utilizes a Large Language Model (LLM), such as the Current OpenAI model, to allow you to ask questions about the meeting or obtain a summary of the discussion. Say goodbye to wasting time rewatching meetings for crucial details needed for documentation or development tasks.
 </p>
 
+## Images
+<img src="/github/exemple3.png"/>
+<img src="/github/exemple1.png"/>
+<img src="/github/exemple2.png"/>
+
 ### Technologies
 * [OpenAI API](https://openai.com/blog/openai-api)
 * [WisperX](https://github.com/m-bain/whisperX)
