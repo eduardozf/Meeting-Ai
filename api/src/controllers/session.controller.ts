@@ -24,6 +24,27 @@ class SessionController {
       if (error instanceof Error) done(error);
     }
   }
+
+  public async refresh_token(
+    req: FastifyRequest,
+    reply: FastifyReply,
+    done: DoneFuncWithErrOrRes,
+  ) {
+    const validateSchema = z.object({
+      refreshToken: z.string(),
+    });
+
+    try {
+      const body = await validateSchema.parseAsync(req.body);
+
+      const auth = new AuthenticateUser();
+      const response = await auth.from_refresh_token(body.refreshToken);
+
+      reply.status(200).json(response);
+    } catch (error) {
+      if (error instanceof Error) done(error);
+    }
+  }
 }
 
 export default SessionController;

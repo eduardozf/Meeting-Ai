@@ -3,6 +3,8 @@ import {
   FastifyInstance,
   FastifyPluginOptions,
 } from 'fastify';
+import { sessionRoutes } from './session.routes';
+import { userRoutes } from './user.routes';
 
 const v1 = (
   fastify: FastifyInstance,
@@ -11,7 +13,8 @@ const v1 = (
 ) => {
   fastify.get('/', () => ({ status: '🚀 V1 is running!' }));
 
-  // TODO Routes
+  fastify.register(sessionRoutes, { prefix: '/session' });
+  fastify.register(userRoutes, { prefix: '/user' });
 
   done();
 };
