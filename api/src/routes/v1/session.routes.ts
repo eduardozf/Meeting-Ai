@@ -12,6 +12,8 @@ const sessionRoutes = (
 
   fastify.post('/refresh', controller.refresh_token);
 
+  fastify.post('/signup', controller.signup);
+
   done();
 };
 

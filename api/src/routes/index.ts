@@ -1,11 +1,14 @@
 import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 import { v1 } from './v1';
 
+import cors from '@fastify/cors';
+
 const routes = (
   fastify: FastifyInstance,
   _options: FastifyPluginOptions,
   done: (err?: Error) => void,
 ) => {
+  fastify.register(cors);
   fastify.register(v1, { prefix: '/v1' });
 
   //

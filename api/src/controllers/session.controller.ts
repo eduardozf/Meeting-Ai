@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import AuthenticateUser from '../services/session/AuthenticateUser';
+import CreateUser from '../services/user/CreateUser';
 import { processError } from '../utils/error';
 
 class SessionController {
@@ -36,6 +37,25 @@ class SessionController {
       reply.status(200).send(response);
     } catch (error) {
       processError(error, 'Failed to refresh token');
+    }
+  }
+
+  public async signup(req: FastifyRequest, reply: FastifyReply) {
+    const validateSchema = z.object({
+      name: z.string(),
+      email: z.string().email(),
+      password: z.string(),
+    });
+
+    try {
+      const body = await validateSchema.parseAsync(req.body);
+
+      const user = new CreateUser();
+      const response = await user.create(body);
+
+      reply.status(200).send(response);
+    } catch (error) {
+      processError(error, 'Failed to create user');
     }
   }
 }
