@@ -1,13 +1,10 @@
-import { DoneFuncWithErrOrRes, FastifyReply, FastifyRequest } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import AuthenticateUser from '../services/session/AuthenticateUser';
+import { processError } from '../utils/error';
 
 class SessionController {
-  public async login(
-    req: FastifyRequest,
-    reply: FastifyReply,
-    done: DoneFuncWithErrOrRes,
-  ) {
+  public async login(req: FastifyRequest, reply: FastifyReply) {
     const validateSchema = z.object({
       email: z.string().email(),
       password: z.string(),
@@ -19,17 +16,13 @@ class SessionController {
       const auth = new AuthenticateUser();
       const response = await auth.from_mail_and_password(body);
 
-      reply.status(200).json(response);
+      reply.status(200).send(response);
     } catch (error) {
-      if (error instanceof Error) done(error);
+      processError(error, 'Failed to login');
     }
   }
 
-  public async refresh_token(
-    req: FastifyRequest,
-    reply: FastifyReply,
-    done: DoneFuncWithErrOrRes,
-  ) {
+  public async refresh_token(req: FastifyRequest, reply: FastifyReply) {
     const validateSchema = z.object({
       refreshToken: z.string(),
     });
@@ -40,9 +33,9 @@ class SessionController {
       const auth = new AuthenticateUser();
       const response = await auth.from_refresh_token(body.refreshToken);
 
-      reply.status(200).json(response);
+      reply.status(200).send(response);
     } catch (error) {
-      if (error instanceof Error) done(error);
+      processError(error, 'Failed to refresh token');
     }
   }
 }

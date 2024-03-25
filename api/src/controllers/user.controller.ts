@@ -1,13 +1,10 @@
-import { DoneFuncWithErrOrRes, FastifyReply, FastifyRequest } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import CreateUser from '../services/user/CreateUser';
+import { processError } from '../utils/error';
 
 class UserController {
-  public async create(
-    req: FastifyRequest,
-    reply: FastifyReply,
-    done: DoneFuncWithErrOrRes,
-  ) {
+  public async create(req: FastifyRequest, reply: FastifyReply) {
     const validateSchema = z.object({
       name: z.string(),
       email: z.string().email(),
@@ -21,9 +18,9 @@ class UserController {
       const createUser = new CreateUser();
       const response = await createUser.create(body);
 
-      reply.status(200).json(response);
+      reply.status(200).send(response);
     } catch (error) {
-      if (error instanceof Error) done(error);
+      processError(error, 'Failed to create user');
     }
   }
 }

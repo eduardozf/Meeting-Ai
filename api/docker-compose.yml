@@ -1,8 +1,0 @@
-services:
-  mongodb:
-    image: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: 'meetai'
-      MONGO_INITDB_ROOT_PASSWORD: 'meetai'
-    ports:
-      - '27017:27017'

@@ -1,15 +1,11 @@
-import {
-  DoneFuncWithErrOrRes,
-  FastifyInstance,
-  FastifyPluginOptions,
-} from 'fastify';
+import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 import { sessionRoutes } from './session.routes';
 import { userRoutes } from './user.routes';
 
 const v1 = (
   fastify: FastifyInstance,
   _options: FastifyPluginOptions,
-  done: DoneFuncWithErrOrRes,
+  done: (err?: Error) => void,
 ) => {
   fastify.get('/', () => ({ status: '🚀 V1 is running!' }));
 

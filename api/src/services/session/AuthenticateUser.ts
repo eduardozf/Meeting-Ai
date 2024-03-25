@@ -2,7 +2,7 @@ import { db } from '../../database';
 import AppError from '../../errors/AppError';
 import jwt from 'jsonwebtoken';
 import { authConfig } from '../../config/auth.config';
-import * as bcpt from 'bcryptjs';
+import { compare } from '../../utils/bcrypt';
 
 type AuthenticateProps = { email: string; password: string };
 
@@ -15,7 +15,7 @@ class AuthenticateUser {
     if (!user) throw new AppError('Invalid email or password');
 
     // Compare password hash
-    const passwordMatch = await bcpt.compare(password, user.password);
+    const passwordMatch = await compare(password, user.password);
     if (!passwordMatch) throw new AppError('Invalid email or password');
 
     // Create token and refresh token

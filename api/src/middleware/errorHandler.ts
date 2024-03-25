@@ -13,6 +13,8 @@ const errorHandler = (
       .send({ type: 'error', message, statusCode });
   }
 
+  console.trace(error);
+
   return reply.status(500).send({
     type: 'error',
     message: 'Internal Server Error!',

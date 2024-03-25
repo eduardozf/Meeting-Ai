@@ -1,14 +1,10 @@
-import {
-  DoneFuncWithErrOrRes,
-  FastifyInstance,
-  FastifyPluginOptions,
-} from 'fastify';
+import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 import { v1 } from './v1';
 
 const routes = (
   fastify: FastifyInstance,
   _options: FastifyPluginOptions,
-  done: DoneFuncWithErrOrRes,
+  done: (err?: Error) => void,
 ) => {
   fastify.register(v1, { prefix: '/v1' });
 
