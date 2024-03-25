@@ -24,7 +24,6 @@ import { useEffect } from "react";
 import Layout from "@/components/layout/index";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { string } from "zod";
 
 const Upload = () => {
   const MAX_FILE_SIZE = 10_000_000_000;
@@ -63,14 +62,6 @@ const Upload = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      ),
-    });
   }
 
   useEffect(() => {
@@ -86,8 +77,8 @@ const Upload = () => {
     <Layout tab="upload">
       <div className="p-8 space-y-8 flex items-center flex-col">
         <div className="flex flex-col items-center">
-          <h1 className="font-bold text-4xl">Meeting AI</h1>
-          <h3 className="text-gray-600 text-md">
+          <h1 className="font-bold text-4xl text-slate-800">Meeting AI</h1>
+          <h3 className="text-slate-600 text-md">
             Smart meeting tool: Transcription, summaries, and instant AI
             responses.
           </h3>
@@ -295,15 +286,15 @@ const Dropzone = ({ file }: DropzoneTypes) => {
         ) : (
           <label
             htmlFor="dropzone-file"
-            className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+            className="flex flex-col items-center justify-center w-full h-64 border-2 border-slate-300 border-dashed rounded-lg cursor-pointer bg-slate-50 hover:bg-slate-100"
           >
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <File className="w-8 h-8 text-gray-500"></File>
-              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+              <File className="w-8 h-8 text-slate-500"></File>
+              <p className="mb-2 text-sm text-slate-500 dark:text-slate-400">
                 <span className="font-semibold">Click to upload</span> or drag
                 and drop
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 MVK, MP4, MPEG, WAV or WEBM (MAX. 10GB)
               </p>
             </div>

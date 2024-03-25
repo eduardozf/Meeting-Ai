@@ -18,8 +18,10 @@ const Projects = () => {
       <div className="w-full flex flex-col items-center">
         <div className="w-2/3 p-8 space-y-8 flex items-center flex-col">
           <div className="flex flex-col items-center">
-            <h1 className="font-bold text-4xl">List of projects</h1>
-            <h3 className="text-gray-600 text-md">
+            <h1 className="font-bold text-4xl text-slate-800">
+              List of projects
+            </h1>
+            <h3 className="text-slate-600 text-md">
               Smart meeting tool: Transcription, summaries, and instant AI
               responses.
             </h3>

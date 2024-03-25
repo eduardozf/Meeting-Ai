@@ -19,9 +19,15 @@ import { useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Layout from "@/components/layout/index";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { AutoAnimateOptions } from "@formkit/auto-animate";
 
 const MeetDetail = () => {
   const [tags, setTags] = useState<string[]>(["Meet"]);
+  const [listRef] = useAutoAnimate({
+    duration: 10_000,
+    easing: "ease-in-out",
+  } as AutoAnimateOptions);
 
   const formSchema = z.object({
     title: z.string(),
@@ -39,14 +45,7 @@ const MeetDetail = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      ),
-    });
+    console.log(values);
   }
 
   const handleAddTag = (tagName: string) => {
@@ -84,10 +83,10 @@ const MeetDetail = () => {
           <div className="w-2/3 flex flex-col space-y-2">
             <div className="w-full border-2 border-neutral-100 p-8 rounded-md space-y-4">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">
+                <h1 className="text-2xl font-bold text-slate-800">
                   Edit Details
                 </h1>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-slate-500">
                   Update meet details
                 </span>
               </div>
@@ -142,7 +141,10 @@ const MeetDetail = () => {
                         <FormLabel>Tags</FormLabel>
                         <FormControl>
                           <div className="flex space-x-4 items-start">
-                            <div className="flex space-x-2 overflow-x-auto  items-center">
+                            <div
+                              className="flex space-x-2 overflow-x-auto  items-center"
+                              ref={listRef}
+                            >
                               {tags?.map((tag) => (
                                 <Tag
                                   name={tag}
@@ -262,7 +264,7 @@ const MeetOptions = () => {
   return (
     <div className="w-full border-2 border-neutral-100 p-8 rounded-md space-y-4">
       <div className="w-full">
-        <h1 className="text-2xl font-bold">Download</h1>
+        <h1 className="text-2xl font-bold text-slate-800">Download</h1>
         <div className="flex space-x-2"></div>
         <span className="text-sm text-gray-500">
           Download all your meeting information

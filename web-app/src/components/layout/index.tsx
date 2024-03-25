@@ -1,5 +1,5 @@
 import Header from "@/components/header/index";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/ui/sonner";
 import React from "react";
 
 type LayoutProps = {
