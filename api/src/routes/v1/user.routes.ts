@@ -1,13 +1,9 @@
-import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 import UserController from '../../controllers/user.controller';
+import { FastifyRegister } from '../../models/fastify';
 
 const controller = new UserController();
 
-const userRoutes = (
-  fastify: FastifyInstance,
-  _options: FastifyPluginOptions,
-  done: (err?: Error) => void,
-) => {
+const userRoutes: FastifyRegister = (fastify, _options, done) => {
   fastify.post('/create', controller.create);
 
   done();

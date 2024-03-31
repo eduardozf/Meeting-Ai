@@ -1,13 +1,9 @@
-import { FastifyInstance, FastifyPluginOptions } from 'fastify';
 import SessionController from '../../controllers/session.controller';
+import { FastifyRegister } from '../../models/fastify';
 
 const controller = new SessionController();
 
-const sessionRoutes = (
-  fastify: FastifyInstance,
-  _options: FastifyPluginOptions,
-  done: (err?: Error) => void,
-) => {
+const sessionRoutes: FastifyRegister = (fastify, _options, done) => {
   fastify.post('/login', controller.login);
 
   fastify.post('/refresh', controller.refresh_token);

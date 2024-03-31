@@ -42,6 +42,8 @@ class AuthenticateUser {
       userId: string;
     };
 
+    // TODO verify if refresh token expired
+
     // Find the user by id
     const user = await db.user.findFirst({
       where: { id: decodedToken.userId },

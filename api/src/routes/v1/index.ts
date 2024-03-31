@@ -1,16 +1,28 @@
-import { FastifyInstance, FastifyPluginOptions } from 'fastify';
+import { ensureAuthenticated } from '../../middleware/ensureAuthenticated';
+import { FastifyRegister } from '../../models/fastify';
+import { fileRoutes } from './file.routes';
 import { sessionRoutes } from './session.routes';
 import { userRoutes } from './user.routes';
 
-const v1 = (
-  fastify: FastifyInstance,
-  _options: FastifyPluginOptions,
-  done: (err?: Error) => void,
-) => {
+const publicRoutes: FastifyRegister = (fastify, _options, done) => {
   fastify.get('/', () => ({ status: '🚀 V1 is running!' }));
-
   fastify.register(sessionRoutes, { prefix: '/session' });
+
+  done();
+};
+
+const privateRoutes: FastifyRegister = (fastify, _options, done) => {
+  fastify.addHook('preHandler', ensureAuthenticated);
+
   fastify.register(userRoutes, { prefix: '/user' });
+  fastify.register(fileRoutes, { prefix: '/file' });
+
+  done();
+};
+
+const v1: FastifyRegister = (fastify, _options, done) => {
+  fastify.register(publicRoutes);
+  fastify.register(privateRoutes);
 
   done();
 };

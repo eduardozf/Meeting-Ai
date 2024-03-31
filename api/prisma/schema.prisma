@@ -10,29 +10,46 @@ datasource db {
 model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  name     String
-  email    String  @unique
-  password String
-  image    String?
-  Meet     Meet[]
+  name       String
+  email      String       @unique
+  password   String
+  image      String?
+  Meet       Meet[]
+  UplaodFile UplaodFile[]
 }
 
 model Meet {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id])
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String       @db.ObjectId
+  user       User         @relation(fields: [userId], references: [id])
+  UplaodFile UplaodFile[]
 
-  title                 String
-  summary               String
-  transcription         String
-  transcription_context String
-  video_url             String
-  tags                  String[]
-  people_count          Int
-  date                  DateTime @default(now())
+  title                 String?
+  summary               String?   @default("")
+  language              String?   @default("")
+  transcription         String?   @default("")
+  transcription_context String?   @default("")
+  tags                  String[]  @default([])
+  people_count          Int?      @default(1)
+  date                  DateTime? @default(now())
 }
 
 model TokenInvalidate {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   token String @unique
+}
+
+model UplaodFile {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  meetId String @db.ObjectId
+
+  user User @relation(fields: [userId], references: [id])
+  meet Meet @relation(fields: [meetId], references: [id])
+
+  type             String @unique
+  fileName         String @unique
+  originalFileName String @unique
+  format           String @unique
+  size             Float  @unique
 }

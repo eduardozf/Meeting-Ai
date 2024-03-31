@@ -13,7 +13,7 @@ const errorHandler = (
       .send({ type: 'error', message, statusCode });
   }
 
-  console.trace(error);
+  console.error(error.message);
 
   return reply.status(500).send({
     type: 'error',
