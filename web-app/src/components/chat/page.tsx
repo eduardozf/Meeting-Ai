@@ -1,0 +1,16 @@
+const models = [
+  { model: "gpt-4-0125-preview", tokenLimit: 128000 },
+  { model: "gpt-4-turbo-preview", tokenLimit: 128000 },
+  { model: "gpt-4-1106-preview", tokenLimit: 128000 },
+  { model: "gpt-4-vision-preview", tokenLimit: 128000 },
+  { model: "gpt-4", tokenLimit: 8192 },
+  { model: "gpt-4-0613", tokenLimit: 8192 },
+  { model: "gpt-4-32k", tokenLimit: 32768 },
+  { model: "gpt-4-32k-0613", tokenLimit: 32768 },
+  { model: "gpt-3.5-turbo", tokenLimit: 16385 },
+  { model: "gpt-3.5-turbo-16k", tokenLimit: 16385 },
+  { model: "gpt-3.5-turbo-0613", tokenLimit: 4096 },
+  { model: "gpt-3.5-turbo-1106", tokenLimit: 4096 },
+  { model: "gpt-3.5-turbo-0125", tokenLimit: 4096 },
+  { model: "gpt-3.5-turbo-16k-0613", tokenLimit: 16385 },
+];

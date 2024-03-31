@@ -11,23 +11,20 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { toast } from "@/components/ui/use-toast";
 import { Wand, Music2, Video, AudioLines, SquarePlus } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import Tag from "@/components/tag/index";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Layout from "@/components/layout/index";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { AutoAnimateOptions } from "@formkit/auto-animate";
+import { errorHandler } from "@/service/errorHandler";
+import { api } from "@/service/api";
+import { useRouter } from "next/router";
+import { toast } from "sonner";
 
 const MeetDetail = () => {
   const [tags, setTags] = useState<string[]>(["Meet"]);
-  const [listRef] = useAutoAnimate({
-    duration: 10_000,
-    easing: "ease-in-out",
-  } as AutoAnimateOptions);
 
   const formSchema = z.object({
     title: z.string(),
@@ -44,9 +41,17 @@ const MeetDetail = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
+  const onSubmit = async (body: z.infer<typeof formSchema>) => {
+    try {
+      const router = useRouter();
+      const response = await api.put(`/meet/${router.query.id}`, body);
+
+      console.log(response.data);
+      toast.success("Meet was edited!");
+    } catch (error) {
+      errorHandler(error, "Failed to edit");
+    }
+  };
 
   const handleAddTag = (tagName: string) => {
     // Validate if tag is to short
@@ -141,10 +146,7 @@ const MeetDetail = () => {
                         <FormLabel>Tags</FormLabel>
                         <FormControl>
                           <div className="flex space-x-4 items-start">
-                            <div
-                              className="flex space-x-2 overflow-x-auto  items-center"
-                              ref={listRef}
-                            >
+                            <div className="flex space-x-2 overflow-x-auto  items-center">
                               {tags?.map((tag) => (
                                 <Tag
                                   name={tag}

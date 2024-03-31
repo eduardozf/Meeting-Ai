@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import { File, Plus, Minus, Video } from "lucide-react";
+import { Upload, Plus, Minus, Video } from "lucide-react";
 import { useForm } from "react-hook-form";
 import {
   Select,
@@ -24,8 +24,9 @@ import { useEffect } from "react";
 import Layout from "@/components/layout/index";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { languages } from "./content/languages";
 
-const Upload = () => {
+const UploadPage = () => {
   const MAX_FILE_SIZE = 10_000_000_000;
   const ACCEPTED_IMAGE_TYPES = [
     "audio/mp3",
@@ -75,7 +76,7 @@ const Upload = () => {
 
   return (
     <Layout tab="upload">
-      <div className="p-8 space-y-8 flex items-center flex-col">
+      <div className="p-8 space-y-8 flex items-center flex-col w-[700px] m-auto h-max bg-white">
         <div className="flex flex-col items-center">
           <h1 className="font-bold text-4xl text-slate-800">Meeting AI</h1>
           <h3 className="text-slate-600 text-md">
@@ -87,7 +88,8 @@ const Upload = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-1/3 space-y-8 flex flex-col"
+            className="w-full space-y-8 flex flex-col"
+            encType="multipart/form-data"
           >
             <FormField
               control={form.control}
@@ -142,73 +144,11 @@ const Upload = () => {
                           <SelectValue placeholder="Select a language" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="english">English</SelectItem>
-                          <SelectItem value="spanish">Spanish</SelectItem>
-                          <SelectItem value="portuguese">Portuguese</SelectItem>
-                          <SelectItem value="korean">Korean</SelectItem>
-                          <SelectItem value="dutch">Dutch</SelectItem>
-                          <SelectItem value="italian">Italian</SelectItem>
-                          <SelectItem value="german">German</SelectItem>
-                          <SelectItem value="thai">Thai</SelectItem>
-                          <SelectItem value="russian">Russian</SelectItem>
-                          <SelectItem value="polish">Polish</SelectItem>
-                          <SelectItem value="indonesian">Indonesian</SelectItem>
-                          <SelectItem value="mandarin-tw">
-                            Mandarin (TW)
-                          </SelectItem>
-                          <SelectItem value="swedish">Swedish</SelectItem>
-                          <SelectItem value="czech">Czech</SelectItem>
-                          <SelectItem value="japanese">Japanese</SelectItem>
-                          <SelectItem value="french">French</SelectItem>
-                          <SelectItem value="romanian">Romanian</SelectItem>
-                          <SelectItem value="cantonese-cn">
-                            Cantonese (CN)
-                          </SelectItem>
-                          <SelectItem value="turkish">Turkish</SelectItem>
-                          <SelectItem value="mandarin-cn">
-                            Mandarin (CN)
-                          </SelectItem>
-                          <SelectItem value="catalan">Catalan</SelectItem>
-                          <SelectItem value="hungarian">Hungarian</SelectItem>
-                          <SelectItem value="ukrainian">Ukrainian</SelectItem>
-                          <SelectItem value="greek">Greek</SelectItem>
-                          <SelectItem value="bulgarian">Bulgarian</SelectItem>
-                          <SelectItem value="arabic">Arabic</SelectItem>
-                          <SelectItem value="serbian">Serbian</SelectItem>
-                          <SelectItem value="macedonian">Macedonian</SelectItem>
-                          <SelectItem value="cantonese (hk)">
-                            Cantonese (HK)
-                          </SelectItem>
-                          <SelectItem value="latvian">Latvian</SelectItem>
-                          <SelectItem value="slovenian">Slovenian</SelectItem>
-                          <SelectItem value="hindi">Hindi</SelectItem>
-                          <SelectItem value="galician">Galician</SelectItem>
-                          <SelectItem value="danish">Danish</SelectItem>
-                          <SelectItem value="urdu">Urdu</SelectItem>
-                          <SelectItem value="slovak">Slovak</SelectItem>
-                          <SelectItem value="hebrew">Hebrew</SelectItem>
-                          <SelectItem value="finnish">Finnish</SelectItem>
-                          <SelectItem value="azerbaijani">
-                            Azerbaijani
-                          </SelectItem>
-                          <SelectItem value="lithuanian">Lithuanian</SelectItem>
-                          <SelectItem value="estonian">Estonian</SelectItem>
-                          <SelectItem value="nynorsk">Nynorsk</SelectItem>
-                          <SelectItem value="welsh">Welsh</SelectItem>
-                          <SelectItem value="punjabi">Punjabi</SelectItem>
-                          <SelectItem value="afrikaans">Afrikaans</SelectItem>
-                          <SelectItem value="persian">Persian</SelectItem>
-                          <SelectItem value="basque">Basque</SelectItem>
-                          <SelectItem value="vietnamese">Vietnamese</SelectItem>
-                          <SelectItem value="bengali">Bengali</SelectItem>
-                          <SelectItem value="nepali">Nepali</SelectItem>
-                          <SelectItem value="marathi">Marathi</SelectItem>
-                          <SelectItem value="belarusian">Belarusian</SelectItem>
-                          <SelectItem value="kazakh">Kazakh</SelectItem>
-                          <SelectItem value="armenian">Armenian</SelectItem>
-                          <SelectItem value="swahili">Swahili</SelectItem>
-                          <SelectItem value="tamil">Tamil</SelectItem>
-                          <SelectItem value="albanian">Albanian</SelectItem>
+                          {languages?.map((language) => (
+                            <SelectItem value={language.value}>
+                              {language.name}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </FormControl>
@@ -279,7 +219,9 @@ const Dropzone = ({ file }: DropzoneTypes) => {
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
               <Video className="w-10 h-10 text-blue-500" />
               <p className="mb-2 text-sm text-blue-500 dark:text-blue-400">
-                <span className="font-semibold">{file?.name}</span>
+                <span className="font-semibold">
+                  Selected file: {file?.name}
+                </span>
               </p>
             </div>
           </label>
@@ -289,7 +231,7 @@ const Dropzone = ({ file }: DropzoneTypes) => {
             className="flex flex-col items-center justify-center w-full h-64 border-2 border-slate-300 border-dashed rounded-lg cursor-pointer bg-slate-50 hover:bg-slate-100"
           >
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <File className="w-8 h-8 text-slate-500"></File>
+              <Upload className="size-8 text-slate-500 mb-2"></Upload>
               <p className="mb-2 text-sm text-slate-500 dark:text-slate-400">
                 <span className="font-semibold">Click to upload</span> or drag
                 and drop
@@ -305,4 +247,4 @@ const Dropzone = ({ file }: DropzoneTypes) => {
   );
 };
 
-export default Upload;
+export default UploadPage;

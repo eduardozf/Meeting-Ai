@@ -29,14 +29,14 @@ const Projects = () => {
 
           <Table>
             <TableHeader>
-              <TableRow>
+              <tr>
                 <TableHead className="w-[20px]">#</TableHead>
                 <TableHead className="w-[300px]">Title</TableHead>
                 <TableHead>Tags</TableHead>
                 <TableHead className="w-[120px] text-right">
                   Created At
                 </TableHead>
-              </TableRow>
+              </tr>
             </TableHeader>
             <TableBody>
               <ProjectRow />
