@@ -1,8 +1,8 @@
 import {
-  FastifyInstance,
-  FastifyPluginOptions,
-  FastifyReply,
-  FastifyRequest,
+  type FastifyInstance,
+  type FastifyPluginOptions,
+  type FastifyReply,
+  type FastifyRequest,
 } from 'fastify';
 
 export type FastifyRegister = (

@@ -1,11 +1,15 @@
-import { FastifyError, FastifyReply, FastifyRequest } from 'fastify';
+import {
+  type FastifyError,
+  type FastifyReply,
+  type FastifyRequest,
+} from 'fastify';
 import AppError from '../errors/AppError';
 
 const errorHandler = (
   error: FastifyError,
   _request: FastifyRequest,
   reply: FastifyReply,
-) => {
+): FastifyReply => {
   if (error instanceof AppError) {
     const { message, statusCode } = error;
     return reply

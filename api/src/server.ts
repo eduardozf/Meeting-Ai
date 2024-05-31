@@ -6,4 +6,5 @@ dotenv.config();
 // Start a default openai instance
 getOpenai();
 
+// eslint-disable-next-line import/first
 import './http';

@@ -1,5 +1,5 @@
 import { ensureAuthenticated } from '../../middleware/ensureAuthenticated';
-import { FastifyRegister } from '../../models/fastify';
+import { type FastifyRegister } from '../../models/fastify';
 import { fileRoutes } from './file.routes';
 import { sessionRoutes } from './session.routes';
 import { userRoutes } from './user.routes';

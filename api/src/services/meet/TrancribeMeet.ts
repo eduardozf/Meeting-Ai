@@ -2,10 +2,10 @@ import { getOpenai } from '../../tools/openai';
 import GetFileContent from '../upload/GetFileContent';
 import WriteFile from '../upload/WriteFIle';
 
-type TranscribeProps = {
+interface TranscribeProps {
   id: string;
   language: string;
-};
+}
 
 class TranscribeMeet {
   public async transcribe({ id, language }: TranscribeProps) {

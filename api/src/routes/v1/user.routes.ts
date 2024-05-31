@@ -1,5 +1,5 @@
 import UserController from '../../controllers/user.controller';
-import { FastifyRegister } from '../../models/fastify';
+import { type FastifyRegister } from '../../models/fastify';
 
 const controller = new UserController();
 

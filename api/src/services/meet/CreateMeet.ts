@@ -2,11 +2,11 @@ import ObjectID from 'bson-objectid';
 import { db } from '../../database';
 import AppError from '../../errors/AppError';
 
-type CreateMeetParams = {
+interface CreateMeetParams {
   id?: string;
   userId: string;
   title: string;
-};
+}
 
 class CreateMeet {
   async create(body: CreateMeetParams) {

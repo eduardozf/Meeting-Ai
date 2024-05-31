@@ -1,22 +1,24 @@
-import { db } from '../../database';
-import AppError from '../../errors/AppError';
-import { hash } from '../../utils/bcrypt';
+import { type User } from '@prisma/client';
+import { db } from '@/database';
+import AppError from '@/errors/AppError';
+import HashGenerator from '../generator/hash';
 
-type NewUserProps = {
+interface NewUserProps {
   name: string;
   email: string;
   password: string;
   image?: string;
-};
+}
 
 class CreateUser {
-  public async create(userBody: NewUserProps) {
+  public async create(userBody: NewUserProps): Promise<Partial<User>> {
     const userExists = await db.user.count({
       where: { email: userBody.email },
     });
     if (userExists) throw new AppError('E-mail already used');
 
-    const passHash = await hash(userBody.password, 14);
+    const hashGenerator = new HashGenerator();
+    const passHash = await hashGenerator.hash(userBody.password);
 
     const user = await db.user.create({
       data: { ...userBody, password: passHash },

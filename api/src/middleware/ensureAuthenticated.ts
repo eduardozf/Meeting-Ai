@@ -1,7 +1,7 @@
 import { authConfig } from '../config/auth.config';
 import jwt from 'jsonwebtoken';
 import AppError from '../errors/AppError';
-import { FastifyMiddleware } from '../models/fastify';
+import { type FastifyMiddleware } from '../models/fastify';
 
 const ensureAuthenticated: FastifyMiddleware = (request, reply, done) => {
   const authHeader = request?.headers?.authorization;

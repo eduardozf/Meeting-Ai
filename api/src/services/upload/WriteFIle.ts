@@ -1,10 +1,10 @@
 import fs from 'fs';
 
-type WriteFileProps = {
+interface WriteFileProps {
   filename: string;
   content: string | Buffer;
   format: string;
-};
+}
 
 class WriteFile {
   async local({ filename, content, format }: WriteFileProps) {

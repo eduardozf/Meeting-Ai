@@ -1,10 +1,10 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { type FastifyReply, type FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import CreateUser from '../services/user/CreateUser';
 import { processError } from '../utils/error';
 
 class UserController {
-  public async create(req: FastifyRequest, reply: FastifyReply) {
+  public async create(req: FastifyRequest, reply: FastifyReply): Promise<void> {
     const validateSchema = z.object({
       name: z.string(),
       email: z.string().email(),

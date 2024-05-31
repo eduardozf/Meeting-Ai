@@ -2,12 +2,30 @@ import { db } from '../../database';
 import AppError from '../../errors/AppError';
 import jwt from 'jsonwebtoken';
 import { authConfig } from '../../config/auth.config';
-import { compare } from '../../utils/bcrypt';
+import { type User } from '@prisma/client';
+import HashGenerator from '../generator/hash';
 
-type AuthenticateProps = { email: string; password: string };
+interface AuthenticateProps {
+  email: string;
+  password: string;
+}
+
+interface AuthenticateMailResponse {
+  user: User;
+  token: string;
+  refreshToken: string;
+}
+
+interface AuthenticateTokenResponse {
+  token: string;
+  refreshToken: string;
+}
 
 class AuthenticateUser {
-  public async from_mail_and_password({ email, password }: AuthenticateProps) {
+  public async from_mail_and_password({
+    email,
+    password,
+  }: AuthenticateProps): Promise<AuthenticateMailResponse> {
     const user = await db.user.findFirst({
       where: { email },
     });
@@ -15,7 +33,8 @@ class AuthenticateUser {
     if (!user) throw new AppError('Invalid email or password');
 
     // Compare password hash
-    const passwordMatch = await compare(password, user.password);
+    const hashGenerator = new HashGenerator();
+    const passwordMatch = await hashGenerator.compare(password, user.password);
     if (!passwordMatch) throw new AppError('Invalid email or password');
 
     // Create token and refresh token
@@ -29,7 +48,9 @@ class AuthenticateUser {
     return { user, token, refreshToken };
   }
 
-  public async from_refresh_token(tokenString: string) {
+  public async from_refresh_token(
+    tokenString: string,
+  ): Promise<AuthenticateTokenResponse> {
     // Verify if refreshToken already used or invalid
     const invalid = await db.tokenInvalidate.findFirst({
       where: { token: tokenString },

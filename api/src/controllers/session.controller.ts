@@ -1,11 +1,11 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { type FastifyReply, type FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import AuthenticateUser from '../services/session/AuthenticateUser';
 import CreateUser from '../services/user/CreateUser';
 import { processError } from '../utils/error';
 
 class SessionController {
-  public async login(req: FastifyRequest, reply: FastifyReply) {
+  public async login(req: FastifyRequest, reply: FastifyReply): Promise<void> {
     const validateSchema = z.object({
       email: z.string().email(),
       password: z.string(),
@@ -23,7 +23,10 @@ class SessionController {
     }
   }
 
-  public async refresh_token(req: FastifyRequest, reply: FastifyReply) {
+  public async refresh_token(
+    req: FastifyRequest,
+    reply: FastifyReply,
+  ): Promise<void> {
     const validateSchema = z.object({
       refreshToken: z.string(),
     });
@@ -40,7 +43,7 @@ class SessionController {
     }
   }
 
-  public async signup(req: FastifyRequest, reply: FastifyReply) {
+  public async signup(req: FastifyRequest, reply: FastifyReply): Promise<void> {
     const validateSchema = z.object({
       name: z.string(),
       email: z.string().email(),

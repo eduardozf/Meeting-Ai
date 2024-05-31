@@ -1,4 +1,4 @@
-import { FileCreateParams } from 'openai/resources/files';
+import { type FileCreateParams } from 'openai/resources/files';
 import { getOpenai } from '../../tools/openai';
 import GetFileContent from '../upload/GetFileContent';
 

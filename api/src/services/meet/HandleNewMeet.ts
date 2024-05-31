@@ -2,13 +2,13 @@ import ObjectID from 'bson-objectid';
 import WriteFile from '../upload/WriteFIle';
 import CreateMeet from './CreateMeet';
 
-type HandleMeetProps = {
+interface HandleMeetProps {
   id: string;
   title: string;
   language: string;
   people_count: number;
   userId: string;
-};
+}
 
 class HandleNewMeet {
   async execute(body: HandleMeetProps) {

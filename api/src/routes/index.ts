@@ -1,7 +1,7 @@
 import { v1 } from './v1';
 
 import cors from '@fastify/cors';
-import { FastifyRegister } from '../models/fastify';
+import { type FastifyRegister } from '../models/fastify';
 
 const routes: FastifyRegister = (fastify, _options, done) => {
   fastify.register(cors);
