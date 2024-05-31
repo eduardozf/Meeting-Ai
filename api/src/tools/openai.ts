@@ -1,14 +1,14 @@
 import OpenAI from 'openai';
 
-let openaiInstance: OpenAI | null = null;
+let openAiInstance: OpenAI | null = null;
 
-const getOpenai = () => {
+function getOpenAi(): typeof openAiInstance {
   // If instanced just return
-  if (openaiInstance) return openaiInstance;
+  if (openAiInstance) return openAiInstance;
 
   // If not executed, create a instance
-  openaiInstance = new OpenAI();
-  return openaiInstance;
-};
+  openAiInstance = new OpenAI();
+  return openAiInstance;
+}
 
-export { getOpenai };
+export { getOpenAi };
