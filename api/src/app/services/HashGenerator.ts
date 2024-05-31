@@ -1,3 +1,4 @@
+import { type IHashGenerator } from '@/interfaces';
 import BcryptGenerator from '../../shared/generator/BcryptGenerator';
 
 class HashGenerator {

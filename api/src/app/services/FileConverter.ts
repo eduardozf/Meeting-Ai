@@ -1,3 +1,4 @@
+import { type IConverter } from '@/interfaces';
 import FFMPEGConverter from '../../shared/converter/FFMPEGConverter';
 
 class FileConverter {

@@ -1,5 +1,5 @@
 import multer from 'fastify-multer';
-import { type FastifyRegister } from '../../../interfaces/IFastify';
+import { type FastifyRegister } from '@/interfaces/IFastify';
 
 const storage = multer.diskStorage({
   destination: './storage',

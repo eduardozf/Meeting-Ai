@@ -1,10 +1,10 @@
 import dotenv from 'dotenv';
-import { getOpenai } from './tools/openai';
+import { getOpenAi } from './shared/utils/openai';
 
 // Import .env variables
 dotenv.config();
 // Start a default openai instance
-getOpenai();
+getOpenAi();
 
 // eslint-disable-next-line import/first
 import './http';

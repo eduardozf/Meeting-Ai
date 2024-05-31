@@ -5,7 +5,7 @@ import {
   ChatCompletionMessageParam,
 } from 'openai/resources/chat/completions';
 import { ThreadCreateParams } from 'openai/resources/beta/threads/threads';
-import { getOpenai } from '../../../tools/openai';
+import { getOpenai } from '../../../shared/utils/openai';
 
 type MessageType = {
   content: string;

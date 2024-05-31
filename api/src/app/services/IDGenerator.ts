@@ -1,3 +1,4 @@
+import { type IIDGenerator } from '@/interfaces';
 import UUIDGenerator from '../../shared/generator/UUIDGenerator';
 
 class IDGenerator {

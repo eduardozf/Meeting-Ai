@@ -1,4 +1,4 @@
-import { getOpenai } from '../../../tools/openai';
+import { getOpenai } from '../../../shared/utils/openai';
 import GetFileContent from '../upload/GetFileContent';
 import WriteFile from '../upload/WriteFIle';
 

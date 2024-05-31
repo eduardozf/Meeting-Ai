@@ -1,5 +1,5 @@
 import { type FileCreateParams } from 'openai/resources/files';
-import { getOpenai } from '../../../tools/openai';
+import { getOpenai } from '../../../shared/utils/openai';
 import GetFileContent from '../upload/GetFileContent';
 
 type PurposesType = FileCreateParams['purpose'];

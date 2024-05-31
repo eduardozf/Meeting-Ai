@@ -1,5 +1,5 @@
-import SessionController from '../../controllers/session.controller';
-import { type FastifyRegister } from '../../../interfaces/IFastify';
+import SessionController from '@/app/controllers/session.controller';
+import { type FastifyRegister } from '@/interfaces/IFastify';
 
 const controller = new SessionController();
 
