@@ -9,30 +9,22 @@
 <br />
 <p align="center">
   <a href="https://github.com/eduardozf/Meeting-Ai">
-    <img src="https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-sound-waves-equalizer-audio-radio-signal-music-recording-vector-png-image_6678910.png" alt="Logo" width="112" height="80">
+    <img src="https://cdn-icons-png.flaticon.com/512/4052/4052565.png" alt="Logo" width="80" height="80">
   </a>
-
   <h3 align="center">Meeting AI</h3>
-
-  <p align="center">
-    A meeting transcriber and assistant!
-    <br/>
-    <a href="https://github.com/eduardozf/Meeting-Ai/issues">Report a Bug</a>
-  </p>
 </p>
 
-## ⚠ Under Construction
-This project is currently under development. I'm working hard to bring the best features and functionalities.
-
-If you'd like to contribute or provide feedback, feel free to open an issue or submit a pull request.
+> [!NOTE]  
+> **Under Construction:** This project is currently under development. I'm working hard to bring the best features and functionalities.
+> If you'd like to contribute or provide feedback, feel free to open an issue or submit a pull request.
 
 <!-- ABOUT THE PROJECT -->
-## About the project
+## About
 <p align="left">
-  This project aims to streamline your workflow by transcribing meetings from video to text. It then utilizes a Large Language Model (LLM), such as the Current OpenAI model, to allow you to ask questions about the meeting or obtain a summary of the discussion. Say goodbye to wasting time rewatching meetings for crucial details needed for documentation or development tasks.
+  This project aims to improve your workflow by transcribing meetings. It utilizes a Large Language Model (LLM), in this case the OpenAI model, to enable you to ask questions about the meeting or obtain a summary of the discussion. Say goodbye to wasting time rewatching meetings for important details required for documentation or development tasks.
 </p>
 
-## Images
+## Interfaces
 <img src="/github/exemple3.png"/>
 <img src="/github/exemple1.png"/>
 <img src="/github/exemple2.png"/>
@@ -47,11 +39,11 @@ If you'd like to contribute or provide feedback, feel free to open an issue or s
 
 <!-- LICENSE -->
 ## License
-Distributed under MIT license. See `LICENSE` for more information.
+Previously distributed under the MIT license, the license has been changed to the GNU Affero General Public License v3.0 (AGPL-3.0) to prevent corporations from exploiting open-source code without contributing back. See `LICENSE` for more information.
 
 <!-- CONTACT -->
 ## Contact
-Eduardo Ferraz - eduardozf1@gmail.com
+Eduardo Ferraz - contato.eduardozf@gmail.com
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
