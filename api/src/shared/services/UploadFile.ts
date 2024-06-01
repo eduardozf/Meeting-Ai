@@ -4,6 +4,7 @@ import { type FastifyRequest, type FastifyReply } from 'fastify';
 import { multerConfig, uploadOnPremises } from '@/config/multer.config';
 import AppError from '@/errors/AppError';
 import { promisify } from 'util';
+import { processError } from '../utils/error';
 
 class UploadFile {
   private readonly uploader: IUploader;
@@ -26,9 +27,11 @@ class UploadFile {
       if (!req?.file) throw new AppError('No file provided');
 
       const fileName = await this.uploader.upload(req.file);
+
       res.status(200).send({ fileName });
     } catch (error) {
-      throw new AppError('Error ocurred while uploading file');
+      console.trace(error);
+      processError(error, 'Error ocurred while uploading file');
     }
   }
 }

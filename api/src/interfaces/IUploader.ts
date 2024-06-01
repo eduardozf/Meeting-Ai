@@ -14,7 +14,6 @@ interface IUploadResponse {
   format: string;
   type: string;
   size: number;
-  buffer: Buffer;
 }
 
 export type { IUploader, MulterFile, IUploadResponse };

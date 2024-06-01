@@ -17,6 +17,5 @@ server.listen({ port }, (err, address) => {
     return process.exit(1);
   }
 
-  console.clear();
   console.log(`✅ Server running on: ${address}`);
 });

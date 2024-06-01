@@ -1,10 +1,15 @@
+import multer from 'fastify-multer';
 import { type FastifyRegister } from '@/interfaces/IFastify';
 import UploadFile from '@/shared/services/UploadFile';
 
 const fileRoutes: FastifyRegister = (fastify, _options, done) => {
   fastify.get('/', () => ({ message: 'TODO' }));
 
-  fastify.post('/upload', new UploadFile().uploadFile);
+  fastify.register(multer.contentParser);
+
+  fastify.post('/upload', async (req, rep) => {
+    await new UploadFile().uploadFile(req, rep);
+  });
 
   done();
 };

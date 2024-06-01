@@ -9,9 +9,11 @@ import path from 'path';
 import { splitFileName } from '../utils/strings';
 
 class OnPremiseUploader implements IUploader {
-  private localFolder: string = '';
+  private localFolder: string;
 
   constructor(localFolder: string) {
+    console.log('CHEGOU AQ');
+
     this.localFolder = localFolder;
   }
 
@@ -78,14 +80,13 @@ class OnPremiseUploader implements IUploader {
   }
 
   public async upload(file: MulterFile): Promise<IUploadResponse> {
-    if (!file?.filename || !file.buffer || !file.size) {
+    if (!file?.filename || !file?.size) {
       throw new AppError('File not provided');
     }
 
     const { format } = splitFileName(file.filename);
 
     const filePath = path.resolve(this.localFolder, file.filename);
-    fs.writeFileSync(filePath, file.buffer);
 
     const response: IUploadResponse = {
       fileName: file.filename,
@@ -94,7 +95,6 @@ class OnPremiseUploader implements IUploader {
       format: format ?? 'unknown',
       type: file.mimetype,
       size: file.size,
-      buffer: file.buffer,
     };
 
     return response;

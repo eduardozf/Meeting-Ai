@@ -1,9 +1,8 @@
-import { type FastifyRequest as FFR } from 'fastify';
+import { type FastifyRequest } from 'fastify';
 import { type File } from 'fastify-multer/src/interfaces';
 
 declare module 'fastify' {
-  export interface FastifyRequest extends FFR {
+  export interface FastifyRequest {
     user?: { id: string };
-    file?: File;
   }
 }

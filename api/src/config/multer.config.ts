@@ -3,8 +3,10 @@ import { splitFileName } from '@/shared/utils/strings';
 import multer from 'fastify-multer';
 import path from 'path';
 
+const dirname = process.cwd();
+
 const multerConfig = {
-  path: path.resolve(path.dirname('.'), '..', '..', '..', 'storage'),
+  path: path.resolve(dirname, 'storage'),
 };
 
 const storage = multer.diskStorage({
@@ -12,9 +14,9 @@ const storage = multer.diskStorage({
     cb(null, multerConfig.path);
   },
   filename: (req, file, cb) => {
-    const { generateID } = new IDGenerator();
+    const generator = new IDGenerator();
 
-    const fileHash = generateID();
+    const fileHash = generator.generateID();
     const { format } = splitFileName(file.originalname);
     const fileName = `${fileHash}.${format}`;
 
