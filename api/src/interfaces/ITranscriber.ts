@@ -1,5 +1,12 @@
 interface ITranscriber {
-  toText: () => Promise<string>;
+  setFile: (fileName: string) => ITranscriber;
+  audioToText: () => Promise<ITranscriberResponse>;
 }
 
-export type { ITranscriber };
+interface ITranscriberResponse {
+  id: string;
+  filename: string;
+  transcription: string;
+}
+
+export type { ITranscriber, ITranscriberResponse };

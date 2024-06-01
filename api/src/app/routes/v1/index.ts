@@ -4,6 +4,7 @@ import { fileRoutes } from './file.routes';
 import { sessionRoutes } from './session.routes';
 import { userRoutes } from './user.routes';
 import { convertRoutes } from './convert.routes';
+import { transcribeRoutes } from './transcribe.routes';
 
 const publicRoutes: FastifyRegister = (fastify, _options, done) => {
   fastify.get('/', () => ({ status: '🚀 V1 is running!' }));
@@ -18,6 +19,7 @@ const privateRoutes: FastifyRegister = (fastify, _options, done) => {
   fastify.register(userRoutes, { prefix: '/user' });
   fastify.register(fileRoutes, { prefix: '/file' });
   fastify.register(convertRoutes, { prefix: '/convert' });
+  fastify.register(transcribeRoutes, { prefix: '/transcribe' });
 
   done();
 };

@@ -1,6 +1,6 @@
 import multer from 'fastify-multer';
 import { type FastifyRegister } from '@/interfaces/IFastify';
-import UploadFile from '@/shared/services/UploadFile';
+import UploadFile from '@/app/services/upload/UploadFileService';
 
 const fileRoutes: FastifyRegister = (fastify, _options, done) => {
   fastify.get('/', () => ({ message: 'TODO' }));

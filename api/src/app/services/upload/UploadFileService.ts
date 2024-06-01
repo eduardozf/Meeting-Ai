@@ -1,13 +1,13 @@
 import { type IUploader } from '@/interfaces';
-import OnPremiseUploader from '../uploader/OnPremiseUploader';
 import { type FastifyRequest, type FastifyReply } from 'fastify';
 import { multerConfig, uploadOnPremises } from '@/config/multer.config';
 import AppError from '@/errors/AppError';
 import { promisify } from 'util';
-import { processError } from '../utils/error';
 import { db } from '@/infra/database';
+import OnPremiseUploader from '@/shared/uploader/OnPremiseUploader';
+import { processError } from '@/shared/utils/error';
 
-class UploadFile {
+class UploadFileService {
   private readonly uploader: IUploader;
 
   constructor() {
@@ -43,9 +43,8 @@ class UploadFile {
 
       res.status(200).send(file);
     } catch (error) {
-      console.trace(error);
       throw processError(error, 'Error ocurred while uploading file');
     }
   }
 }
-export default UploadFile;
+export default UploadFileService;

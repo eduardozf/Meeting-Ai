@@ -2,7 +2,7 @@ import OpenAI from 'openai';
 
 let openAiInstance: OpenAI | null = null;
 
-function getOpenAi(): typeof openAiInstance {
+function getOpenAi(): OpenAI {
   // If instanced just return
   if (openAiInstance) return openAiInstance;
 

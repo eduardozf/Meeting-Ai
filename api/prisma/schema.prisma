@@ -47,9 +47,9 @@ model UploadFile {
   user User @relation(fields: [userId], references: [id])
   meet Meet @relation(fields: [meetId], references: [id])
 
-  type             String @unique
+  type             String
   fileName         String @unique
-  originalFileName String @unique
-  format           String @unique
-  size             Float  @unique
+  originalFileName String
+  format           String
+  size             Float
 }
