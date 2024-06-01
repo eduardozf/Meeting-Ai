@@ -1,9 +1,9 @@
-import { db } from '../../../infra/database';
-import AppError from '../../../errors/AppError';
+import { db } from '@/infra/database';
+import AppError from '@/errors/AppError';
 import jwt from 'jsonwebtoken';
-import { authConfig } from '../../../config/auth.config';
+import { authConfig } from '@/config/auth.config';
 import { type User } from '@prisma/client';
-import HashGenerator from '../HashGenerator';
+import HashGenerator from '@/shared/services/HashGenerator';
 
 interface AuthenticateProps {
   email: string;

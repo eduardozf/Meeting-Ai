@@ -1,5 +1,5 @@
 import { type IIDGenerator } from '@/interfaces';
-import UUIDGenerator from '../../shared/generator/UUIDGenerator';
+import UUIDGenerator from '../generator/UUIDGenerator';
 
 class IDGenerator {
   private readonly generator: IIDGenerator = new UUIDGenerator();

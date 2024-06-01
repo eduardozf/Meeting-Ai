@@ -1,5 +1,5 @@
 import { type IHashGenerator } from '@/interfaces';
-import BcryptGenerator from '../../shared/generator/BcryptGenerator';
+import BcryptGenerator from '../generator/BcryptGenerator';
 
 class HashGenerator {
   private readonly generator: IHashGenerator = new BcryptGenerator();

@@ -7,4 +7,4 @@ dotenv.config();
 getOpenAi();
 
 // eslint-disable-next-line import/first
-import './http';
+import '@/infra/http';

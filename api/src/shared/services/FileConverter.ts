@@ -1,5 +1,5 @@
 import { type IConverter } from '@/interfaces';
-import FFMPEGConverter from '../../shared/converter/FFMPEGConverter';
+import FFMPEGConverter from '../converter/FFMPEGConverter';
 
 class FileConverter {
   private readonly converter: IConverter = new FFMPEGConverter();

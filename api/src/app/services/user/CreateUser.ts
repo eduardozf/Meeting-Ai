@@ -1,7 +1,7 @@
 import { type User } from '@prisma/client';
 import { db } from '@/infra/database';
 import AppError from '@/errors/AppError';
-import HashGenerator from '../HashGenerator';
+import HashGenerator from '@/shared/services/HashGenerator';
 
 interface NewUserProps {
   name: string;
