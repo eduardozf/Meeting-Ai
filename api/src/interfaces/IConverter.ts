@@ -1,6 +1,12 @@
 interface IConverter {
   setFilePath: (path: string) => IConverter;
-  toMp3: (bitrate?: number) => Promise<string>;
+  setBitrate: (value: number) => IConverter;
+  toMp3: () => Promise<IConverterResponse>;
 }
 
-export type { IConverter };
+interface IConverterResponse {
+  id: string;
+  filename: string;
+}
+
+export type { IConverter, IConverterResponse };

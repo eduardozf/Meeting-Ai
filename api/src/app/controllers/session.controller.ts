@@ -19,7 +19,7 @@ class SessionController {
 
       reply.status(200).send(response);
     } catch (error) {
-      processError(error, 'Failed to login');
+      throw processError(error, 'Failed to login');
     }
   }
 
@@ -39,7 +39,7 @@ class SessionController {
 
       reply.status(200).send(response);
     } catch (error) {
-      processError(error, 'Failed to refresh token');
+      throw processError(error, 'Failed to refresh token');
     }
   }
 
@@ -58,7 +58,7 @@ class SessionController {
 
       reply.status(200).send(response);
     } catch (error) {
-      processError(error, 'Failed to create user');
+      throw processError(error, 'Failed to create user');
     }
   }
 }

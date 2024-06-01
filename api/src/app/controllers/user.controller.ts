@@ -20,7 +20,7 @@ class UserController {
 
       reply.status(200).send(response);
     } catch (error) {
-      processError(error, 'Failed to create user');
+      throw processError(error, 'Failed to create user');
     }
   }
 }

@@ -1,5 +1,6 @@
 import { v4 } from 'uuid';
 import AppError from '@/errors/AppError';
+import { type IIDGenerator } from '@/interfaces';
 
 class UUIDGenerator implements IIDGenerator {
   public generate(): string {

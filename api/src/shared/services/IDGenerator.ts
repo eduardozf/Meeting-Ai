@@ -1,11 +1,11 @@
 import { type IIDGenerator } from '@/interfaces';
-import UUIDGenerator from '../generator/UUIDGenerator';
+import BSONGenerator from '../generator/BSONGenerator';
 
 class IDGenerator {
   private readonly generator: IIDGenerator;
 
   constructor() {
-    this.generator = new UUIDGenerator();
+    this.generator = new BSONGenerator();
   }
 
   public generateID(): string {

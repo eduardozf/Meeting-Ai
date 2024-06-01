@@ -12,8 +12,6 @@ class OnPremiseUploader implements IUploader {
   private localFolder: string;
 
   constructor(localFolder: string) {
-    console.log('CHEGOU AQ');
-
     this.localFolder = localFolder;
   }
 
@@ -84,15 +82,15 @@ class OnPremiseUploader implements IUploader {
       throw new AppError('File not provided');
     }
 
-    const { format } = splitFileName(file.filename);
-
+    const { name: id, format } = splitFileName(file.filename);
     const filePath = path.resolve(this.localFolder, file.filename);
 
     const response: IUploadResponse = {
+      id,
       fileName: file.filename,
       originalFileName: file.originalname,
       filePath,
-      format: format ?? 'unknown',
+      format,
       type: file.mimetype,
       size: file.size,
     };

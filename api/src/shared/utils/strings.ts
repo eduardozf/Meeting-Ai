@@ -1,6 +1,8 @@
+import AppError from '@/errors/AppError';
+
 interface SplitFilenameResponse {
-  name?: string;
-  format?: string;
+  name: string;
+  format: string;
 }
 
 /**
@@ -9,10 +11,14 @@ interface SplitFilenameResponse {
  * @returns \{ name: "myFilename", format: "mp4" }
  */
 function splitFileName(s: string): SplitFilenameResponse {
-  const regex = /^(.+)\.([^.]+)$/;
+  const regex = /([^\\]+)\.([^.]+)$/;
   const match = regex.exec(s);
 
-  return { name: match?.[1], format: match?.[2] };
+  if (!match?.[1] || !match?.[2]) {
+    throw new AppError('Failed to split filename');
+  }
+
+  return { name: match[1], format: match[2] };
 }
 
 export { splitFileName };

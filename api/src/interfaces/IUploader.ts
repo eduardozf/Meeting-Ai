@@ -8,6 +8,7 @@ interface IUploader {
 }
 
 interface IUploadResponse {
+  id: string;
   fileName: string;
   originalFileName: string;
   filePath: string;

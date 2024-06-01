@@ -5,6 +5,7 @@ import { multerConfig, uploadOnPremises } from '@/config/multer.config';
 import AppError from '@/errors/AppError';
 import { promisify } from 'util';
 import { processError } from '../utils/error';
+import { db } from '@/infra/database';
 
 class UploadFile {
   private readonly uploader: IUploader;
@@ -26,12 +27,24 @@ class UploadFile {
 
       if (!req?.file) throw new AppError('No file provided');
 
-      const fileName = await this.uploader.upload(req.file);
+      const file = await this.uploader.upload(req?.file);
 
-      res.status(200).send({ fileName });
+      await db.uploadFile.create({
+        data: {
+          userId: req.user.id,
+          meetId: file.id,
+          fileName: file.fileName,
+          format: file.format,
+          originalFileName: file.originalFileName,
+          size: file.size,
+          type: file.type,
+        },
+      });
+
+      res.status(200).send(file);
     } catch (error) {
       console.trace(error);
-      processError(error, 'Error ocurred while uploading file');
+      throw processError(error, 'Error ocurred while uploading file');
     }
   }
 }

@@ -1,20 +1,24 @@
 import ffmpeg from 'fluent-ffmpeg';
 import ffmpegPath from '@ffmpeg-installer/ffmpeg';
-import AppError from '../../errors/AppError';
-import IDGenerator from '../generator/id';
+import { type IConverterResponse, type IConverter } from '@/interfaces';
+import { splitFileName } from '../utils/strings';
+import path from 'path';
+import { processError } from '../utils/error';
 ffmpeg.setFfmpegPath(ffmpegPath.path);
 
 class FFMPEGConverter implements IConverter {
   private filePath: string = '';
+  private bitrate: number = 25;
 
   public setFilePath(path: string): IConverter {
     this.filePath = path;
+    this.bitrate = Number(process.env.DEFAULT_MP3_BITRATE) || 25;
 
     return this;
   }
 
   private getOutputFolder(): string {
-    let folder = './tmp';
+    let folder = './storage';
 
     const customFolder = process?.env?.CONVERTER_OUTPUT_FOLDER;
     if (customFolder) {
@@ -27,22 +31,24 @@ class FFMPEGConverter implements IConverter {
     return folder;
   }
 
-  private getNewID(): string {
-    const generator = new IDGenerator();
-    const id = generator.generateID();
-    return id;
+  public setBitrate(value: number): this {
+    this.bitrate = value;
+
+    return this;
   }
 
-  public async toMp3(bitrate = 30): Promise<string> {
+  public async toMp3(): Promise<IConverterResponse> {
     try {
-      const newId = this.getNewID();
+      const { name } = splitFileName(this.filePath);
+      const convertedFilename = `${name}.mp3`;
+
       const outputFolder = this.getOutputFolder();
-      const fullOutputPath = `${outputFolder}/${newId}.mp3`;
+      const fullOutputPath = path.resolve(outputFolder, convertedFilename);
 
       const filePromise = new Promise((resolve, reject) => {
         ffmpeg(this.filePath)
           .output(fullOutputPath)
-          .audioBitrate(bitrate)
+          .audioBitrate(this.bitrate)
           .on('end', () => {
             resolve(true);
           })
@@ -53,9 +59,14 @@ class FFMPEGConverter implements IConverter {
       });
 
       await filePromise;
-      return fullOutputPath;
+      const response: IConverterResponse = {
+        id: name,
+        filename: convertedFilename,
+      };
+
+      return response;
     } catch (error: any) {
-      throw new AppError('Failed to convert file to mp3');
+      throw processError(error, 'Failed to convert file to mp3');
     }
   }
 }
