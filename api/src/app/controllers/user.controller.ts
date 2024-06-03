@@ -1,6 +1,6 @@
 import { type FastifyReply, type FastifyRequest } from 'fastify';
 import { z } from 'zod';
-import CreateUser from '../services/user/CreateUser';
+import CreateUser from '../services/CreateUser';
 import { processError } from '@/shared/utils/error';
 
 class UserController {
