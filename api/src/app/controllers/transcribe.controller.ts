@@ -1,7 +1,7 @@
 import { type FastifyReply, type FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { processError } from '@/shared/utils/error';
-import TranscriberService from '../services/transcriber/TranscriberService';
+import TranscriberService from '../services/TranscriberService';
 
 class TranscribeController {
   public async transcribe(

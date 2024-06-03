@@ -1,7 +1,7 @@
 import { type FastifyReply, type FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { processError } from '@/shared/utils/error';
-import ChatMeet from '../services/meet/ChatMeet';
+import ChatMeet from '../services/ChatMeet';
 
 class ChatController {
   public async ask(req: FastifyRequest, reply: FastifyReply): Promise<void> {

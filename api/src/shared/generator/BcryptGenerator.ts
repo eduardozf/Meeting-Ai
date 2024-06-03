@@ -1,4 +1,5 @@
 import AppError from '@/errors/AppError';
+import { type IHashGenerator } from '@/interfaces';
 import bcrypt from 'bcrypt';
 
 class BcryptGenerator implements IHashGenerator {
