@@ -4,4 +4,10 @@ const baseURL = "http://localhost:3333/v1";
 
 const api = axios.create({ baseURL });
 
-export { api };
+const setApiToken = (token: string) => {
+  api.defaults.headers.common["Authorization"] = token;
+
+  return api;
+};
+
+export { api, setApiToken };

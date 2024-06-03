@@ -144,8 +144,11 @@ const UploadPage = () => {
                           <SelectValue placeholder="Select a language" />
                         </SelectTrigger>
                         <SelectContent>
-                          {languages?.map((language) => (
-                            <SelectItem value={language.value}>
+                          {languages?.map((language, i) => (
+                            <SelectItem
+                              value={language.value}
+                              key={`${i}-${language}`}
+                            >
                               {language.name}
                             </SelectItem>
                           ))}

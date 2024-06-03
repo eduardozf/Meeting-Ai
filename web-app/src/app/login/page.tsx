@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,12 +9,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Toaster } from "@/components/ui/sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { api } from "@/service/api";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import {
   Form,
@@ -25,8 +24,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Auth } from "@/service/auth";
 
-const LoginForm = () => {
+const LoginPage = () => {
+  const router = useRouter();
   const ValidateLoginSchema = z.object({
     email: z.string().email(),
     password: z.string().min(3),
@@ -41,7 +42,19 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (body: z.infer<typeof ValidateLoginSchema>) => {
-    // TODO
+    try {
+      await Auth.getAuth().login(body);
+
+      // TODO mover definição do cookie para dentro do Auth.login()
+      // TODO colocar COOKIES dentro de um serviço
+      document.cookie = "isAuthenticated=true; path=/";
+
+      toast.success("Login successful!");
+      router.push("/upload");
+    } catch (error) {
+      toast.error("Login failed :(");
+      console.error(error);
+    }
   };
 
   return (
@@ -100,11 +113,14 @@ const LoginForm = () => {
             </div>
           </CardContent>
         </Card>
-        <div className="absolute inset-0 h-full w-full z-0 bg-slate-100 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:18px_18px]"></div>
+        <div className="absolute h-screen w-screen">
+          <div className="absolute inset-0 h-full w-full z-0 bg-slate-100 bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:18px_18px]"></div>
+          <div className="absolute inset-0 h-full w-full z-10 pointer-events-none bg-fade"></div>
+        </div>
       </div>
       <Toaster />
     </>
   );
 };
 
-export default LoginForm;
+export default LoginPage;

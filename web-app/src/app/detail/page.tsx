@@ -14,13 +14,11 @@ import { useForm } from "react-hook-form";
 import { Wand, Music2, Video, AudioLines, SquarePlus } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import Tag from "@/components/tag/index";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Layout from "@/components/layout/index";
 import { errorHandler } from "@/service/errorHandler";
-import { api } from "@/service/api";
-import { useRouter } from "next/router";
 import { toast } from "sonner";
 
 const MeetDetail = () => {

@@ -1,14 +1,19 @@
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const currentUser = { name: "edu" };
-  // const currentUser = request.cookies.get('currentUser')?.value
+  // TODO colocar COOKIES dentro de um serviço
+  const isAuthenticated = request.cookies.get("isAuthenticated")?.value;
+  const inLoginPage = request.nextUrl.pathname.startsWith("/login");
 
-  if (currentUser && !request.nextUrl.pathname.startsWith("/dashboard")) {
+  if (isAuthenticated && inLoginPage) {
     return Response.redirect(new URL("/upload", request.url));
   }
 
-  if (!currentUser && !request.nextUrl.pathname.startsWith("/login")) {
+  if (!isAuthenticated && !inLoginPage) {
     return Response.redirect(new URL("/login", request.url));
   }
 }
+
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+};
