@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,7 +16,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { api } from "@/service/api";
-import { errorHandler } from "@/service/errorHandler";
 
 import {
   Form,
@@ -27,34 +25,23 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { toast } from "sonner";
 
 const LoginForm = () => {
-  const router = useRouter();
-  const formSchema = z.object({
+  const ValidateLoginSchema = z.object({
     email: z.string().email(),
     password: z.string().min(3),
   });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof ValidateLoginSchema>>({
+    resolver: zodResolver(ValidateLoginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = async (body: z.infer<typeof formSchema>) => {
-    try {
-      const response = await api.post("/session/login", body);
-      console.log(response.data);
-      toast.success("Login successful!");
-
-      router.push("/projects");
-    } catch (error) {
-      console.log(error);
-      errorHandler(error, "Failed to login");
-    }
+  const onSubmit = async (body: z.infer<typeof ValidateLoginSchema>) => {
+    // TODO
   };
 
   return (

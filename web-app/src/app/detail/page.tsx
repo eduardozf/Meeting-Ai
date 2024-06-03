@@ -43,10 +43,10 @@ const MeetDetail = () => {
 
   const onSubmit = async (body: z.infer<typeof formSchema>) => {
     try {
-      const router = useRouter();
-      const response = await api.put(`/meet/${router.query.id}`, body);
+      // const router = useRouter();
+      // const response = await api.put(`/meet/${router.query.id}`, body);
 
-      console.log(response.data);
+      // console.log(response.data);
       toast.success("Meet was edited!");
     } catch (error) {
       errorHandler(error, "Failed to edit");
