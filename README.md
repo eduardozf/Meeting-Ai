@@ -18,12 +18,6 @@
 > **Under Construction:** This project is currently under development. I'm working hard to bring the best features and functionalities.
 > If you'd like to contribute or provide feedback, feel free to open an issue or submit a pull request.
 
-<!-- ABOUT THE PROJECT -->
-## About
-<p align="left">
-  This project aims to improve your workflow by transcribing meetings. It utilizes a Large Language Model (LLM), in this case the OpenAI model, to enable you to ask questions about the meeting or obtain a summary of the discussion. Say goodbye to wasting time rewatching meetings for important details required for documentation or development tasks.
-</p>
-
 ## Interfaces
 <img src="/github/exemple3.png"/>
 <img src="/github/exemple1.png"/>
@@ -36,6 +30,12 @@
 * [NodeJS](https://nodejs.org/en)
 * [Typescript](https://www.typescriptlang.org/)
 * [Fastify](https://fastify.dev/docs/)
+
+<!-- ABOUT THE PROJECT -->
+## About
+<p align="left">
+  This project aims to improve your workflow by transcribing meetings. It utilizes a Large Language Model (LLM), in this case the OpenAI model, to enable you to ask questions about the meeting or obtain a summary of the discussion. Say goodbye to wasting time rewatching meetings for important details required for documentation or development tasks.
+</p>
 
 <!-- LICENSE -->
 ## License
@@ -61,8 +61,6 @@ If you find this project helpful and would like to support its development, cons
 [stars-shield]: https://img.shields.io/github/stars/eduardozf/Meeting-Ai.svg?style=flat-square
 [stars-url]: https://github.com/eduardozf/Meeting-Ai/stargazers
 [issues-shield]: https://img.shields.io/github/issues/eduardozf/Meeting-Ai.svg?style=flat-square
-[issues-url]: https://github.com/eduardozf/Twitter/issues
-[license-shield]: https://img.shields.io/github/license/eduardozf/Twitter.svg?style=flat-square
-[license-url]: https://github.com/eduardozf/Twitter/blob/main/LICENSE.txt
-[product-screenshot]: images/MainPage.png
-[product-gif]: images/app.gif
+[issues-url]: https://github.com/eduardozf/Meeting-Ai/issues
+[license-shield]: https://img.shields.io/github/license/eduardozf/Meeting-Ai.svg?style=flat-square
+[license-url]: https://github.com/eduardozf/Meeting-Ai/blob/main/LICENSE.txt
