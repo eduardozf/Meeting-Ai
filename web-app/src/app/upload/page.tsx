@@ -25,6 +25,7 @@ import Layout from "@/components/layout/index";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { languages } from "./content/languages";
+import Header from "@/components/header";
 
 const UploadPage = () => {
   const MAX_FILE_SIZE = 10_000_000_000;
@@ -75,130 +76,136 @@ const UploadPage = () => {
   const fileRef = form.register("file");
 
   return (
-    <Layout tab="upload">
-      <div className="p-8 space-y-8 flex items-center flex-col w-[700px] m-auto h-max bg-white">
-        <div className="flex flex-col items-center">
-          <h1 className="font-bold text-4xl text-slate-800">Meeting AI</h1>
-          <h3 className="text-slate-600 text-md">
-            Smart meeting tool: Transcription, summaries, and instant AI
-            responses.
-          </h3>
-        </div>
+    <>
+      <Header currentTab="upload"></Header>
 
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-8 flex flex-col"
-            encType="multipart/form-data"
-          >
-            <FormField
-              control={form.control}
-              name="file"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <>
-                      <Dropzone file={field.value} />
-                      <Input
-                        {...fileRef}
-                        id="dropzone-file"
-                        type="file"
-                        className="hidden"
-                        onChange={(event) => {
-                          field.onChange(event.target?.files?.[0] ?? undefined);
-                        }}
-                      />
-                    </>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+      <Layout tab="upload">
+        <div className="p-8 space-y-8 flex items-center flex-col w-[700px] m-auto h-max bg-white">
+          <div className="flex flex-col items-center">
+            <h1 className="font-bold text-4xl text-slate-800">Meeting AI</h1>
+            <h3 className="text-slate-600 text-md">
+              Smart meeting tool: Transcription, summaries, and instant AI
+              responses.
+            </h3>
+          </div>
 
-            <div className="w-full flex space-y-2 flex-col items-center">
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="w-full space-y-8 flex flex-col"
+              encType="multipart/form-data"
+            >
               <FormField
                 control={form.control}
-                name="title"
+                name="file"
                 render={({ field }) => (
-                  <FormItem className="flex-1 w-full">
-                    <FormLabel>Title</FormLabel>
+                  <FormItem>
                     <FormControl>
-                      <Input placeholder="Video Title" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="language"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Language</FormLabel>
-                    <FormControl>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select a language" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {languages?.map((language, i) => (
-                            <SelectItem
-                              value={language.value}
-                              key={`${i}-${language}`}
-                            >
-                              {language.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormDescription>
-                      Language spoken in the meeting
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="people"
-                render={({ field }) => (
-                  <FormItem className="flex-1 w-full">
-                    <FormLabel>People count</FormLabel>
-                    <FormControl>
-                      <div className="flex border-[1px] border-slate-200 rounded-xl px-2">
-                        <Button className="p-0 m-0 border-none text-gray-500 bg-transparent hover:bg-transparent hover:text-gray-800">
-                          <Minus className="w-7 h-7" />
-                        </Button>
+                      <>
+                        <Dropzone file={field.value} />
                         <Input
-                          {...field}
-                          type="number"
-                          className="text-center p-0 m-0 align-middle border-none focus-visible:ring-offset-0 focus-visible:ring-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                          {...fileRef}
+                          id="dropzone-file"
+                          type="file"
+                          className="hidden"
+                          onChange={(event) => {
+                            field.onChange(
+                              event.target?.files?.[0] ?? undefined
+                            );
+                          }}
                         />
-                        <Button className="p-0 m-0 border-none text-gray-500 bg-transparent hover:bg-transparent hover:text-gray-800">
-                          <Plus className="w-7 h-7" />
-                        </Button>
-                      </div>
+                      </>
                     </FormControl>
-                    <FormDescription>
-                      Insert the number of people on this meeting
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-            </div>
 
-            <Button type="submit" className="w-full self-end">
-              Upload
-            </Button>
-          </form>
-        </Form>
-      </div>
-    </Layout>
+              <div className="w-full flex space-y-2 flex-col items-center">
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem className="flex-1 w-full">
+                      <FormLabel>Title</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Video Title" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="language"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Language</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select a language" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {languages?.map((language, i) => (
+                              <SelectItem
+                                value={language.value}
+                                key={`${i}-${language}`}
+                              >
+                                {language.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormDescription>
+                        Language spoken in the meeting
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="people"
+                  render={({ field }) => (
+                    <FormItem className="flex-1 w-full">
+                      <FormLabel>People count</FormLabel>
+                      <FormControl>
+                        <div className="flex border-[1px] border-slate-200 rounded-xl px-2">
+                          <Button className="p-0 m-0 border-none text-gray-500 bg-transparent hover:bg-transparent hover:text-gray-800">
+                            <Minus className="w-7 h-7" />
+                          </Button>
+                          <Input
+                            {...field}
+                            type="number"
+                            className="text-center p-0 m-0 align-middle border-none focus-visible:ring-offset-0 focus-visible:ring-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                          />
+                          <Button className="p-0 m-0 border-none text-gray-500 bg-transparent hover:bg-transparent hover:text-gray-800">
+                            <Plus className="w-7 h-7" />
+                          </Button>
+                        </div>
+                      </FormControl>
+                      <FormDescription>
+                        Insert the number of people on this meeting
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <Button type="submit" className="w-full self-end">
+                Upload
+              </Button>
+            </form>
+          </Form>
+        </div>
+      </Layout>
+    </>
   );
 };
 

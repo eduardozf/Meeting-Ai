@@ -116,6 +116,10 @@ body {
   grid-area: TOP;
 }
 
+.containerGrid {
+  grid-area: HISTORY CHAT;
+}
+
 .historyGrid {
   grid-area: HISTORY;
 }

@@ -8,29 +8,27 @@ const ChatPage = () => {
     <div className="chatLayout">
       <Header currentTab={"chat"} />
 
-      <div className="w-full h-full flex">
-        <section className="overflow-hidden historyGrid">
-          <ChatHistory />
-        </section>
-        <section className="chatGrid">
-          <ChatSection />
-        </section>
-      </div>
+      <section className="overflow-hidden historyGrid">
+        <ChatHistory />
+      </section>
+      <section className="chatGrid ">
+        <ChatSection />
+      </section>
     </div>
   );
 };
 
 const ChatHistory = () => {
   return (
-    <div className="max-w-max relative h-full overflow-y-auto overflow-x-clip">
+    <div className="max-w-max relative h-full overflow-y-auto overflow-x-clip ">
       <nav className=" p-3 pb-3.5 ">
         <div className="flex flex-col ">
           {[...Array(10)].map((_, i) => (
-            <ChatButton key={i} id={i} />
+            <ChatButton key={i} id={i + 1} />
           ))}
         </div>
 
-        <div className=" h-8 bg-slate-800 flex justify-center items-center rounded-sm">
+        <div className=" h-8 bg-slate-800 flex justify-center items-center rounded-sm mt-2">
           <button className="underline text-sm text-white">
             Carregar mais
           </button>
@@ -42,9 +40,9 @@ const ChatHistory = () => {
 
 const ChatButton = ({ id }) => {
   return (
-    <button className="w-full flex items-center hover:bg-slate-200 rounded-sm p-2 ">
+    <button className="w-full flex items-center hover:bg-slate-200 hover:rounded-sm p-2 border-b-[1px] border-black border-solid">
       <span className="text-sm truncate ">
-        [{id}] CHAT REUNIÃO LOREM IPSUM DORI SIMET
+        {id}. CHAT REUNIÃO LOREM IPSUM DORI SIMET
       </span>
     </button>
   );

@@ -20,6 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Layout from "@/components/layout/index";
 import { errorHandler } from "@/service/errorHandler";
 import { toast } from "sonner";
+import Header from "@/components/header";
 
 const MeetDetail = () => {
   const [tags, setTags] = useState<string[]>(["Meet"]);
@@ -80,111 +81,116 @@ const MeetDetail = () => {
   };
 
   return (
-    <Layout tab="detail">
-      <div className="flex h-full flex-col items-center justify-between px-24 pt-6">
-        <div className="w-full flex space-x-4">
-          <div className="w-2/3 flex flex-col space-y-2">
-            <div className="w-full border-2 border-neutral-100 p-8 rounded-md space-y-4">
-              <div>
-                <h1 className="text-2xl font-bold text-slate-800">
-                  Edit Details
-                </h1>
-                <span className="text-sm text-slate-500">
-                  Update meet details
-                </span>
-              </div>
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="w-full space-y-6"
-                >
-                  <FormField
-                    control={form.control}
-                    name="title"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Title</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Video Title" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="summary"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Summary</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="A short meeting summary ..."
-                            className="resize-none"
-                            rows={6}
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                        <Button
-                          type="button"
-                          className="space-x-2 bg-slate-300 text-slate-900 w-full hover:bg-slate-900 hover:text-white "
-                        >
-                          <Wand className="h-4 w-4" />
-                          <span>Generate summary with AI</span>
-                        </Button>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="tags"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Tags</FormLabel>
-                        <FormControl>
-                          <div className="flex space-x-4 items-start">
-                            <div className="flex space-x-2 overflow-x-auto  items-center">
-                              {tags?.map((tag) => (
-                                <Tag
-                                  name={tag}
-                                  key={tag}
-                                  handleRemove={handleRemoveTag}
-                                />
-                              ))}
-                            </div>
-                            <div className="flex items-center">
-                              <Input
-                                {...field}
-                                className="w-24"
-                                placeholder="Add Tag"
-                                onBlur={() =>
-                                  handleAddTag(form.watch("tags") as any)
-                                }
-                              />
-                            </div>
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                        <FormDescription>
-                          We recommend including the names of people or subjects
-                        </FormDescription>
-                      </FormItem>
-                    )}
-                  />
-                  <Button type="submit" className="w-full">
-                    Save
-                  </Button>
-                </form>
-              </Form>
-            </div>
-            <MeetOptions />
-          </div>
+    <>
+      <Header currentTab="detail"></Header>
 
-          <VideoInformation />
+      <Layout tab="detail">
+        <div className="flex h-full flex-col items-center justify-between px-24 pt-6">
+          <div className="w-full flex space-x-4">
+            <div className="w-2/3 flex flex-col space-y-2">
+              <div className="w-full border-2 border-neutral-100 p-8 rounded-md space-y-4">
+                <div>
+                  <h1 className="text-2xl font-bold text-slate-800">
+                    Edit Details
+                  </h1>
+                  <span className="text-sm text-slate-500">
+                    Update meet details
+                  </span>
+                </div>
+                <Form {...form}>
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="w-full space-y-6"
+                  >
+                    <FormField
+                      control={form.control}
+                      name="title"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Title</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Video Title" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="summary"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Summary</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="A short meeting summary ..."
+                              className="resize-none"
+                              rows={6}
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                          <Button
+                            type="button"
+                            className="space-x-2 bg-slate-300 text-slate-900 w-full hover:bg-slate-900 hover:text-white "
+                          >
+                            <Wand className="h-4 w-4" />
+                            <span>Generate summary with AI</span>
+                          </Button>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="tags"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Tags</FormLabel>
+                          <FormControl>
+                            <div className="flex space-x-4 items-start">
+                              <div className="flex space-x-2 overflow-x-auto  items-center">
+                                {tags?.map((tag) => (
+                                  <Tag
+                                    name={tag}
+                                    key={tag}
+                                    handleRemove={handleRemoveTag}
+                                  />
+                                ))}
+                              </div>
+                              <div className="flex items-center">
+                                <Input
+                                  {...field}
+                                  className="w-24"
+                                  placeholder="Add Tag"
+                                  onBlur={() =>
+                                    handleAddTag(form.watch("tags") as any)
+                                  }
+                                />
+                              </div>
+                            </div>
+                          </FormControl>
+                          <FormMessage />
+                          <FormDescription>
+                            We recommend including the names of people or
+                            subjects
+                          </FormDescription>
+                        </FormItem>
+                      )}
+                    />
+                    <Button type="submit" className="w-full">
+                      Save
+                    </Button>
+                  </form>
+                </Form>
+              </div>
+              <MeetOptions />
+            </div>
+
+            <VideoInformation />
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

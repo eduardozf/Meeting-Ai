@@ -11,46 +11,51 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Header from "@/components/header";
 
 const Projects = () => {
   return (
-    <Layout tab="projects">
-      <div className="w-full flex flex-col items-center">
-        <div className="w-2/3 p-8 space-y-8 flex items-center flex-col">
-          <div className="flex flex-col items-center">
-            <h1 className="font-bold text-4xl text-slate-800">
-              List of projects
-            </h1>
-            <h3 className="text-slate-600 text-md">
-              Smart meeting tool: Transcription, summaries, and instant AI
-              responses.
-            </h3>
-          </div>
+    <>
+      <Header currentTab="projects"></Header>
 
-          <Table>
-            <TableHeader>
-              <tr>
-                <TableHead className="w-[20px]">#</TableHead>
-                <TableHead className="w-[300px]">Title</TableHead>
-                <TableHead>Tags</TableHead>
-                <TableHead className="w-[120px] text-right">
-                  Created At
-                </TableHead>
-              </tr>
-            </TableHeader>
-            <TableBody>
-              <ProjectRow />
-              <ProjectRow />
-              <ProjectRow />
-              <ProjectRow />
-              <ProjectRow />
-              <ProjectRow />
-            </TableBody>
-            <TableCaption>Click on a meet to open details</TableCaption>
-          </Table>
+      <Layout tab="projects">
+        <div className="w-full flex flex-col items-center">
+          <div className="w-2/3 p-8 space-y-8 flex items-center flex-col">
+            <div className="flex flex-col items-center">
+              <h1 className="font-bold text-4xl text-slate-800">
+                List of projects
+              </h1>
+              <h3 className="text-slate-600 text-md">
+                Smart meeting tool: Transcription, summaries, and instant AI
+                responses.
+              </h3>
+            </div>
+
+            <Table>
+              <TableHeader>
+                <tr>
+                  <TableHead className="w-[20px]">#</TableHead>
+                  <TableHead className="w-[300px]">Title</TableHead>
+                  <TableHead>Tags</TableHead>
+                  <TableHead className="w-[120px] text-right">
+                    Created At
+                  </TableHead>
+                </tr>
+              </TableHeader>
+              <TableBody>
+                <ProjectRow />
+                <ProjectRow />
+                <ProjectRow />
+                <ProjectRow />
+                <ProjectRow />
+                <ProjectRow />
+              </TableBody>
+              <TableCaption>Click on a meet to open details</TableCaption>
+            </Table>
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 
