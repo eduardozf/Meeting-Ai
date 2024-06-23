@@ -184,7 +184,7 @@ const UploadPage = () => {
                       </div>
                     </FormControl>
                     <FormDescription>
-                      Amount of people on this meeting
+                      Insert the number of people on this meeting
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

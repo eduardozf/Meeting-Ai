@@ -10,10 +10,7 @@ type LayoutProps = {
 export function Layout({ children, tab }: LayoutProps) {
   return (
     <>
-      <main className="h-full">
-        <Header currentTab={tab} />
-        {children}
-      </main>
+      <main className="h-full">{children}</main>
       <Toaster />
     </>
   );

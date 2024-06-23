@@ -2,11 +2,12 @@ import { AudioLines } from "lucide-react";
 import Link from "next/link";
 import Settings from "../settings/index";
 
-type HeaderProps = { currentTab: string };
+type Tabs = "upload" | "projects" | "detail" | "chat";
+type HeaderProps = { currentTab: Tabs };
 
 const Header = ({ currentTab }: HeaderProps) => {
   return (
-    <header className="flex py-2 px-8 bg-slate-100 shadow-sm">
+    <header className="flex py-2 px-8 bg-slate-100 shadow-sm headerGrid">
       <div>
         <AudioLines className="w-10 h-10" />
       </div>
@@ -27,11 +28,11 @@ const Header = ({ currentTab }: HeaderProps) => {
             route="/detail"
             active={currentTab === "detail"}
           />
-          {/* <RouteButton
+          <RouteButton
             name="Chat"
             route="/chat"
             active={currentTab === "chat"}
-          /> */}
+          />
         </div>
       </div>
       <div>

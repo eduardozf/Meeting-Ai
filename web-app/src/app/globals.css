@@ -100,3 +100,25 @@ body {
     /* background-blend-mode: lighten; */
   }
 }
+
+.chatLayout {
+  display: grid;
+
+  grid-template-columns: 260px auto;
+  grid-template-rows: 50px auto;
+
+  grid-template-areas:
+    "TOP TOP"
+    "HISTORY CHAT";
+}
+
+.headerGrid {
+  grid-area: TOP;
+}
+
+.historyGrid {
+  grid-area: HISTORY;
+}
+.chatGrid {
+  grid-area: CHAT;
+}

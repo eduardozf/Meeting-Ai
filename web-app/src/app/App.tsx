@@ -3,6 +3,7 @@ import { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import CookieService from "@/service/storage/CookieService";
 
+// TODO remover
 function MyApp({ Component, pageProps }: AppProps) {
   const [cookieService, setCookieService] = useState<CookieService | null>(
     null

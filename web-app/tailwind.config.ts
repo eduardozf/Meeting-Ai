@@ -19,6 +19,8 @@ const config = {
     },
     extend: {
       backgroundImage: {
+        faded:
+          "linear-gradient(90deg, rgba(0,0,0,0) 90%, rgba(255,255,255,1) 100%);",
         "fade-grid":
           "linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)), linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)), linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)), linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0))",
       },
