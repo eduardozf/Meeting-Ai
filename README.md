@@ -14,18 +14,21 @@
   <h3 align="center">Meeting AI</h3>
 </p>
 
-> [!NOTE]  
-> **Under Construction:** This project is currently under development. I'm working hard to bring the best features and functionalities.
-> If you'd like to contribute or provide feedback, feel free to open an issue or submit a pull request.
+> [!CAUTION]  
+> **Project Discontinued:** Unfortunately, this project has been discontinued.
+> I had plans to implement "multi-speaker diarization" primarily using the [whisper-diarization](https://github.com/MahmoudAshraf97/whisper-diarization) library and also to integrate the [OLLAMA LLM](https://github.com/ollama/ollama) as a meeting assistant.
+> However, most AI operations require a GPU with CUDA support, which I do not have, making it difficult to implement new functionalities.
+> While there is the possibility of using cloud services, it goes beyond the scope I want for a personal project.
 
 ## Interfaces
-<img src="/github/exemple3.png"/>
+<img src="/github/exemple0.png"/>
 <img src="/github/exemple1.png"/>
 <img src="/github/exemple2.png"/>
+<img src="/github/exemple3.png"/>
+<img src="/github/exemple4.png"/>
 
 ### Technologies
 * [OpenAI API](https://openai.com/blog/openai-api)
-* [WisperX](https://github.com/m-bain/whisperX)
 * [NextJS](https://nextjs.org/docs)
 * [NodeJS](https://nodejs.org/en)
 * [Typescript](https://www.typescriptlang.org/)
